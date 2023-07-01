@@ -7,4 +7,6 @@ class ColorPackage {
   static const Color lightGray = Color(0xff9DADC6);
   static const Color darkGray = Color(0xff3A4968);
   static const Color black = Colors.black;
+  static const Color yellow = Color(0xffFFB600);
+  static const Color red = Color(0xffFF3236);
 }
