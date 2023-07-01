@@ -14,6 +14,9 @@ class App extends StatelessWidget {
         BlocProvider<HomeBloc>(
           create: (context) => HomeBloc(),
         ),
+        BlocProvider<PillsBloc>(
+          create: (context) => PillsBloc(),
+        ),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
