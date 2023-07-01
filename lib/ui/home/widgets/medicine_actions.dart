@@ -1,19 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medicine_tracker/bloc/bloc.dart';
 import 'package:medicine_tracker/ui/ui.dart';
 
 import '../../../models/models.dart';
 
 class MedicineActions extends StatelessWidget {
-  final Pill pill;
+  final PillModel pill;
   const MedicineActions({required this.pill, super.key});
 
-  Widget get bottomButtons => Padding(
+  AppBar get appBar => AppBar(
+        centerTitle: true,
+        title: Column(
+          children: [
+            Text(pill.name),
+            Text(pill.timeToTake),
+          ],
+        ),
+      );
+
+  Widget bottomButtons({required Function(String pillId) onPillTaken}) =>
+      Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
           children: [
             Button(
               label: 'Confirmar Medicamento ingerido',
-              onTap: () {},
+              onTap: () => onPillTaken(pill.id),
               icon: const Icon(Icons.check),
             ),
             const SizedBox(height: 20),
@@ -48,26 +61,25 @@ class MedicineActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Column(
+    return BlocBuilder<PillsBloc, PillsState>(builder: (context, state) {
+      onPillTaken(String pillId) {
+        context.read<PillsBloc>().add(PillsEventTakePill(pillId: pillId));
+        Navigator.pop(context);
+      }
+
+      return Scaffold(
+        appBar: appBar,
+        body: Column(
           children: [
-            Text(pill.name),
-            Text(pill.timeToTake),
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: Pill(pill: pill, shouldRedirectOnTap: false),
+            ),
+            const Expanded(child: SizedBox()),
+            bottomButtons(onPillTaken: onPillTaken),
           ],
         ),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: Medicine(pill: pill, shouldRedirectOnTap: false),
-          ),
-          const Expanded(child: SizedBox()),
-          bottomButtons,
-        ],
-      ),
-    );
+      );
+    });
   }
 }
