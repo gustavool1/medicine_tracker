@@ -15,7 +15,6 @@ class PillsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PillsBloc, PillsState>(builder: (context, state) {
       return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: state.pills.map((pill) => Pill(pill: pill)).toList(),
       );
     });
