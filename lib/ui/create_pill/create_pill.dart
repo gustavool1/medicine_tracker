@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medicine_tracker/bloc/bloc.dart';
 import 'package:medicine_tracker/styles/styles.dart';
 
-class CreatePillPage extends StatefulWidget {
+import 'widgets/select_dates.dart';
+
+class CreatePillPage extends StatelessWidget {
   const CreatePillPage({super.key});
-
-  @override
-  State<CreatePillPage> createState() => _CreatePillPageState();
-}
-
-class _CreatePillPageState extends State<CreatePillPage> {
-  String selectedFrequency = '1h';
 
   Widget get pillNameTextField => TextField(
         decoration: InputDecoration(
@@ -48,7 +45,7 @@ class _CreatePillPageState extends State<CreatePillPage> {
                 ),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             DropdownButton<String>(
               items: frequencyList
                   .map<DropdownMenuItem<String>>(
@@ -58,10 +55,8 @@ class _CreatePillPageState extends State<CreatePillPage> {
                     ),
                   )
                   .toList(),
-              onChanged: (value) => setState(() {
-                selectedFrequency = value ?? '';
-              }),
-              value: selectedFrequency,
+              onChanged: (value) => {},
+              value: '1h',
             )
           ],
         ),
@@ -78,7 +73,7 @@ class _CreatePillPageState extends State<CreatePillPage> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [pillNameTextField, frequency],
+          children: [pillNameTextField, frequency, SelectDates()],
         ),
       ),
     );
