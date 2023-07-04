@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medicine_tracker/helpers/extensions.dart';
 
 import '../../../bloc/bloc.dart';
 import '../../../styles/styles.dart';
@@ -66,9 +67,10 @@ class SelectDates extends StatelessWidget {
                         ),
                       ),
                     ).then((value) {
+                      if (value == null) return;
                       onSelectStartDate(value);
                       _textEditingControllerStartDate.text =
-                          '${value.day}/${value.month}/${value.year}';
+                          startSelectedDate.dMY;
                     });
                   }),
             ),
@@ -87,7 +89,7 @@ class SelectDates extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.only(top: 10.0),
               child: Icon(
-                Icons.calendar_today,
+                Icons.calendar_month_sharp,
                 color: ColorPackage.blue,
               ),
             ),
@@ -130,9 +132,9 @@ class SelectDates extends StatelessWidget {
                         ),
                       ),
                     ).then((value) {
+                      if (value == null) return;
                       onSelectEndDate(value);
-                      _textEditingControllerEndDate.text =
-                          '${value.day}/${value.month}/${value.year}';
+                      _textEditingControllerEndDate.text = endSelectedDate.dMY;
                     });
                   }),
             ),
