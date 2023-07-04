@@ -19,6 +19,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<CalendarBloc>(
           create: (context) => CalendarBloc(),
+        ),
+        BlocProvider<CreatePillBloc>(
+          create: (context) => CreatePillBloc(),
         )
       ],
       child: const MaterialApp(
