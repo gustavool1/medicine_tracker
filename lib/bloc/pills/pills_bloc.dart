@@ -7,6 +7,8 @@ class PillsBloc extends Bloc<PillsEvent, PillsState> {
   static final List<PillModel> _pills = [
     PillModel(id: '1', amount: 2, name: 'Vitamina Dx', timeToTake: '8:00'),
   ];
+  // final CreatePillBloc createPillBloc;
+// required this.createPillBloc}
   PillsBloc() : super(PillsState(_pills)) {
     on<PillsEventTakePill>(_onTakePill);
   }

@@ -1,16 +1,18 @@
+import 'package:flutter/material.dart';
+
 class CreatePill {
   String? name;
-  String? frequency;
   DateTime? startTakingPill;
   DateTime? endTakingPill;
-  DateTime? reminderEveryDay;
+  TimeOfDay? reminderEveryDay;
+  int? frequencyInHours;
 
   CreatePill({
     this.name,
-    this.frequency,
     this.startTakingPill,
     this.endTakingPill,
     this.reminderEveryDay,
+    this.frequencyInHours,
   });
 
   CreatePill copyWith({
@@ -18,14 +20,15 @@ class CreatePill {
     String? frequency,
     DateTime? startTakingPill,
     DateTime? endTakingPill,
-    DateTime? reminderEveryDay,
+    TimeOfDay? reminderEveryDay,
+    int? frequencyInHours,
   }) {
     return CreatePill(
       name: name,
-      frequency: frequency,
       startTakingPill: startTakingPill,
       endTakingPill: endTakingPill,
       reminderEveryDay: reminderEveryDay,
+      frequencyInHours: frequencyInHours,
     );
   }
 }

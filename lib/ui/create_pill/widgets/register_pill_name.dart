@@ -9,10 +9,9 @@ class RegisterPillName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CreatePillBloc, CreatePillState>(
-        builder: (context, state) {
+    return BlocBuilder<PillsBloc, PillsState>(builder: (context, state) {
       void onChange(String name) {
-        context.read<CreatePillBloc>().add(CreatePillSetPillName(name));
+        // context.read<CreatePillBloc>().add(CreatePillSetPillName(name));
       }
 
       return TextField(

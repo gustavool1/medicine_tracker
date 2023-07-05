@@ -18,10 +18,12 @@ class CreatePillPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const RegisterPillName(),
-            const FrequencyPill(),
-            SelectDates(),
-            Reminder()
+            // const RegisterPillName(),
+            // const FrequencyPill(),
+            // SelectDates(),
+            // Reminder(),
+            // const Expanded(child: SizedBox()),
+            // const SubmitButton()
           ],
         ),
       ),

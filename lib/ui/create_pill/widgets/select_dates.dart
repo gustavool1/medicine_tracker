@@ -144,16 +144,17 @@ class SelectDates extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CalendarBloc, CalendarState>(builder: (context, state) {
+    return BlocBuilder<CreatePillBloc, CreatePillState>(
+        builder: (context, state) {
       void selectStartDay(DateTime date) {
-        context.read<CalendarBloc>().add(
-              CalendarEventOnSelectedDayStart(date),
+        context.read<CreatePillBloc>().add(
+              CreatePillSetStartDate(date),
             );
       }
 
       void selectEndDay(DateTime date) {
-        context.read<CalendarBloc>().add(
-              CalendarEventOnSelectedDayEnd(date),
+        context.read<CreatePillBloc>().add(
+              CreatePillSetEndDate(date),
             );
       }
 
@@ -162,12 +163,13 @@ class SelectDates extends StatelessWidget {
           selectStartDate(
             context: context,
             onSelectStartDate: selectStartDay,
-            startSelectedDate: state.rangeDateTime.start ?? DateTime.now(),
+            startSelectedDate:
+                state.createPill.startTakingPill ?? DateTime.now(),
           ),
           selectEndDate(
             context: context,
             onSelectEndDate: selectEndDay,
-            endSelectedDate: state.rangeDateTime.end ??
+            endSelectedDate: state.createPill.endTakingPill ??
                 DateTime.now().add(const Duration(days: 1)),
           ),
         ],
