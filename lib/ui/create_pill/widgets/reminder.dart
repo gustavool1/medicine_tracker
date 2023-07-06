@@ -10,16 +10,16 @@ class Reminder extends StatelessWidget {
   final TextEditingController _timerTextEditingController =
       TextEditingController();
 
+  void setTimer(BuildContext context, TimeOfDay time) {
+    context.read<CreatePillBloc>().add(CreatePillSetReminder(time));
+    _timerTextEditingController.text = time.format(context);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CreatePillBloc, CreatePillState>(
-        builder: (context, state) {
-      void setTimer(TimeOfDay time) {
-        context.read<CreatePillBloc>().add(CreatePillSetReminder(time));
-        _timerTextEditingController.text = time.format(context);
-      }
-
-      return Padding(
+    return BlocProvider<CreatePillBloc>(
+      create: (context) => context.read<CreatePillBloc>(),
+      child: Padding(
         padding: const EdgeInsets.only(top: 16.0),
         child: Row(
           children: [
@@ -58,13 +58,14 @@ class Reminder extends StatelessWidget {
                 onTap: () async {
                   await showTimePicker(
                           context: context, initialTime: TimeOfDay.now())
-                      .then((value) => setTimer(value ?? TimeOfDay.now()));
+                      .then((value) =>
+                          setTimer(context, value ?? TimeOfDay.now()));
                 },
               ),
             ),
           ],
         ),
-      );
-    });
+      ),
+    );
   }
 }

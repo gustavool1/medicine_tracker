@@ -6,6 +6,7 @@ class CreatePill {
   DateTime? endTakingPill;
   TimeOfDay? reminderEveryDay;
   int? frequencyInHours;
+  int? pillsAmount;
 
   CreatePill({
     this.name,
@@ -13,6 +14,7 @@ class CreatePill {
     this.endTakingPill,
     this.reminderEveryDay,
     this.frequencyInHours,
+    this.pillsAmount,
   });
 
   CreatePill copyWith({
@@ -22,6 +24,7 @@ class CreatePill {
     DateTime? endTakingPill,
     TimeOfDay? reminderEveryDay,
     int? frequencyInHours,
+    int? pillsAmount,
   }) {
     return CreatePill(
       name: name,
@@ -29,6 +32,7 @@ class CreatePill {
       endTakingPill: endTakingPill,
       reminderEveryDay: reminderEveryDay,
       frequencyInHours: frequencyInHours,
+      pillsAmount: pillsAmount,
     );
   }
 }

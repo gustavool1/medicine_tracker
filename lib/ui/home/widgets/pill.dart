@@ -72,7 +72,7 @@ class Pill extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTap(context),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
         child: Container(
           height: 105,
           decoration: BoxDecoration(

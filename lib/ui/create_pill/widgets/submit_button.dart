@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../bloc/bloc.dart';
 import '../../button.dart';
 
 class SubmitButton extends StatelessWidget {
@@ -7,12 +9,16 @@ class SubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 20.0),
-      child: Button(
+    return BlocBuilder<PillsBloc, PillsState>(builder: (context, state) {
+      final createPillBloc = context.read<CreatePillBloc>();
+      return Button(
         label: 'Criar Medicamento',
-        onTap: () {},
-      ),
-    );
+        onTap: () {
+          context.read<PillsBloc>().add(PillsEventCreatePill(
+              createPill: createPillBloc.state.createPill));
+          Navigator.pop(context);
+        },
+      );
+    });
   }
 }

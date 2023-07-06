@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:medicine_tracker/bloc/bloc.dart';
 
+import '../../../bloc/bloc.dart';
 import '../../../styles/styles.dart';
 
-class FrequencyPill extends StatelessWidget {
-  const FrequencyPill({super.key});
+class PillsAmount extends StatelessWidget {
+  const PillsAmount({super.key});
 
-  List<String> get frequencyList =>
-      ['1h', '2h', '3h', '4h', '5h', '6h', '7h', '8h', '9h'];
+  List<int> get amounts => [1, 2, 3, 4];
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class FrequencyPill extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Text(
-                  'Frequência de uso diário:',
+                  'Quantidade de pilulas:',
                   style: TextFonts.body1.copyWith(
                     color: ColorPackage.darkBlue,
                     fontWeight: FontWeight.w600,
@@ -34,25 +33,20 @@ class FrequencyPill extends StatelessWidget {
               ),
               const Spacer(),
               DropdownButton<String>(
-                items: frequencyList
+                items: amounts
                     .map<DropdownMenuItem<String>>(
-                      (String value) => DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
+                      (int value) => DropdownMenuItem<String>(
+                        value: value.toString(),
+                        child: Text(value.toString()),
                       ),
                     )
                     .toList(),
                 onChanged: (frequency) {
-                  final frequencyInHours =
-                      int.parse(frequency?.substring(0, 1) ?? '0');
-                  context
-                      .read<CreatePillBloc>()
-                      .add(CreatePillSetFrequency(frequencyInHours));
+                  context.read<CreatePillBloc>().add(
+                      CreatePillSetPillAmount(int.parse(frequency ?? '1')));
                 },
                 value:
-                    '${context.watch<CreatePillBloc>().state.createPill.frequencyInHours ?? 1}h',
-
-                // "${context.read<CreatePillBloc>().state.createPill.frequencyInHours}h",
+                    '${context.watch<CreatePillBloc>().state.createPill.pillsAmount ?? 1}',
               ),
             ],
           ),

@@ -14,16 +14,17 @@ class CreatePillPage extends StatelessWidget {
       ),
       body: Container(
         color: ColorPackage.defaultPrimary,
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // const RegisterPillName(),
-            // const FrequencyPill(),
-            // SelectDates(),
-            // Reminder(),
-            // const Expanded(child: SizedBox()),
-            // const SubmitButton()
+            const RegisterPillName(),
+            const FrequencyPill(),
+            const PillsAmount(),
+            SelectDates(),
+            Reminder(),
+            const Expanded(child: SizedBox()),
+            const SubmitButton()
           ],
         ),
       ),

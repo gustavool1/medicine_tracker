@@ -15,7 +15,7 @@ class SelectDates extends StatelessWidget {
 
   Widget selectStartDate(
           {required BuildContext context,
-          required Function(DateTime) onSelectStartDate,
+          required Function(BuildContext, DateTime) onSelectStartDate,
           required DateTime startSelectedDate}) =>
       Padding(
         padding: const EdgeInsets.only(top: 16.0),
@@ -68,7 +68,7 @@ class SelectDates extends StatelessWidget {
                       ),
                     ).then((value) {
                       if (value == null) return;
-                      onSelectStartDate(value);
+                      onSelectStartDate(context, value);
                       _textEditingControllerStartDate.text =
                           startSelectedDate.dMY;
                     });
@@ -80,7 +80,7 @@ class SelectDates extends StatelessWidget {
 
   Widget selectEndDate(
           {required BuildContext context,
-          required Function(DateTime) onSelectEndDate,
+          required Function(BuildContext, DateTime) onSelectEndDate,
           required DateTime endSelectedDate}) =>
       Padding(
         padding: const EdgeInsets.only(top: 16.0),
@@ -133,7 +133,7 @@ class SelectDates extends StatelessWidget {
                       ),
                     ).then((value) {
                       if (value == null) return;
-                      onSelectEndDate(value);
+                      onSelectEndDate(context, value);
                       _textEditingControllerEndDate.text = endSelectedDate.dMY;
                     });
                   }),
@@ -142,38 +142,45 @@ class SelectDates extends StatelessWidget {
         ),
       );
 
+  void selectStartDay(BuildContext context, DateTime date) {
+    context.read<CreatePillBloc>().add(
+          CreatePillSetStartDate(date),
+        );
+  }
+
+  void selectEndDay(BuildContext context, DateTime date) {
+    context.read<CreatePillBloc>().add(
+          CreatePillSetEndDate(date),
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CreatePillBloc, CreatePillState>(
-        builder: (context, state) {
-      void selectStartDay(DateTime date) {
-        context.read<CreatePillBloc>().add(
-              CreatePillSetStartDate(date),
-            );
-      }
-
-      void selectEndDay(DateTime date) {
-        context.read<CreatePillBloc>().add(
-              CreatePillSetEndDate(date),
-            );
-      }
-
-      return Column(
+    return BlocProvider<CreatePillBloc>(
+      create: (context) => context.read<CreatePillBloc>(),
+      child: Column(
         children: [
           selectStartDate(
-            context: context,
-            onSelectStartDate: selectStartDay,
-            startSelectedDate:
-                state.createPill.startTakingPill ?? DateTime.now(),
-          ),
+              context: context,
+              onSelectStartDate: selectStartDay,
+              startSelectedDate: context
+                      .watch<CreatePillBloc>()
+                      .state
+                      .createPill
+                      .startTakingPill ??
+                  DateTime.now()),
           selectEndDate(
             context: context,
             onSelectEndDate: selectEndDay,
-            endSelectedDate: state.createPill.endTakingPill ??
+            endSelectedDate: context
+                    .watch<CreatePillBloc>()
+                    .state
+                    .createPill
+                    .endTakingPill ??
                 DateTime.now().add(const Duration(days: 1)),
           ),
         ],
-      );
-    });
+      ),
+    );
   }
 }

@@ -31,3 +31,9 @@ class CreatePillSetFrequency extends CreatePillEvent {
 
   CreatePillSetFrequency(this.frequency);
 }
+
+class CreatePillSetPillAmount extends CreatePillEvent {
+  int amount;
+
+  CreatePillSetPillAmount(this.amount);
+}

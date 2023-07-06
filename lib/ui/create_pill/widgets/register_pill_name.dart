@@ -9,12 +9,9 @@ class RegisterPillName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PillsBloc, PillsState>(builder: (context, state) {
-      void onChange(String name) {
-        // context.read<CreatePillBloc>().add(CreatePillSetPillName(name));
-      }
-
-      return TextField(
+    return BlocProvider<CreatePillBloc>(
+      create: (context) => context.read<CreatePillBloc>(),
+      child: TextField(
         decoration: InputDecoration(
           hintText: 'Nome do medicamento',
           contentPadding: const EdgeInsets.only(bottom: 5),
@@ -28,8 +25,10 @@ class RegisterPillName extends StatelessWidget {
             color: ColorPackage.lightGray,
           ),
         ),
-        onChanged: onChange,
-      );
-    });
+        onChanged: (name) {
+          context.read<CreatePillBloc>().add(CreatePillSetPillName(name));
+        },
+      ),
+    );
   }
 }

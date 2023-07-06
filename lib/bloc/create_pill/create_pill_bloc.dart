@@ -11,6 +11,7 @@ class CreatePillBloc extends Bloc<CreatePillEvent, CreatePillState> {
     on<CreatePillSetEndDate>(_onCreatePillSetEndDate);
     on<CreatePillSetReminder>(_onSetTimeReminder);
     on<CreatePillSetFrequency>(_onSetFrequency);
+    on<CreatePillSetPillAmount>(_onSetAmount);
   }
 
   void _onCreatePillSetName(
@@ -40,6 +41,12 @@ class CreatePillBloc extends Bloc<CreatePillEvent, CreatePillState> {
   void _onSetFrequency(
       CreatePillSetFrequency event, Emitter<CreatePillState> emit) {
     createPill.frequencyInHours = event.frequency;
+    emit(CreatePillState(createPill));
+  }
+
+  void _onSetAmount(
+      CreatePillSetPillAmount event, Emitter<CreatePillState> emit) {
+    createPill.pillsAmount = event.amount;
     emit(CreatePillState(createPill));
   }
 }

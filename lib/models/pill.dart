@@ -1,3 +1,6 @@
+import 'package:medicine_tracker/helpers/extensions.dart';
+import 'package:medicine_tracker/models/models.dart';
+
 class PillModel {
   final String id;
   final String timeToTake;
@@ -12,6 +15,15 @@ class PillModel {
     required this.amount,
     this.isTakeit = false,
   });
+
+  factory PillModel.fromCreatePillToPillModel(CreatePill createPill) {
+    return PillModel(
+      amount: createPill.pillsAmount ?? 1,
+      id: createPill.name ?? '',
+      name: createPill.name ?? '',
+      timeToTake: createPill.reminderEveryDay?.toHoursMinutes ?? '',
+    );
+  }
 
   void takePill() {
     isTakeit = true;
