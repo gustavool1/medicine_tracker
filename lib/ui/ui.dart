@@ -1,2 +1,2 @@
-export 'home/widgets.dart';
+export '../pages/home/widgets.dart';
 export 'button.dart';
