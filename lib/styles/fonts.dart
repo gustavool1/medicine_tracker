@@ -8,6 +8,8 @@ class TextFonts {
     color: ColorPackage.black,
   );
 
+  static final head1 =
+      _monteserratBaseStyle.copyWith(fontSize: 24, fontWeight: FontWeight.bold);
   static final head2 = _monteserratBaseStyle.copyWith(fontSize: 18);
 
   static final body1 = _monteserratBaseStyle.copyWith(fontSize: 16);
