@@ -17,6 +17,8 @@ dependencies:
   google_fonts: ^4.0.4
   table_calendar: ^3.0.9
   intl: ^0.18.0
+  scroll_to_index: ^3.0.1
+  flutter_staggered_animations: ^1.1.1
 
 dev_dependencies:
   flutter_test:
