@@ -28,13 +28,18 @@ class Pill extends StatelessWidget {
         padding: const EdgeInsets.only(left: 10.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               pill.timeToTake,
               style: TextFonts.body1.copyWith(color: ColorPackage.darkGray),
             ),
             const SizedBox(height: 8),
-            const Icon(Icons.medical_services_rounded),
+            Image.asset(
+              Assets.pill,
+              width: 30,
+              height: 30,
+            ),
           ],
         ),
       );
