@@ -10,4 +10,5 @@ class ColorPackage {
   static const Color black = Colors.black;
   static const Color yellow = Color(0xffFFB600);
   static const Color red = Color(0xffFF3236);
+  static const Color transparent = Colors.transparent;
 }
