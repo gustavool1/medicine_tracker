@@ -23,6 +23,14 @@ class DayCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CalendarBloc, CalendarState>(builder: (context, state) {
+      void changeSelectedDate(DateTime day) {
+        context.read<CalendarBloc>().add(CalendarEventOnSelectedDay(day));
+      }
+
+      void getPillsByDay(DateTime day) {
+        context.read<PillsBloc>().add(PillsEventGetPillsByDay(day: day));
+      }
+
       return Padding(
         padding: const EdgeInsets.all(5.0),
         child: Stack(
@@ -43,9 +51,10 @@ class DayCell extends StatelessWidget {
                     tapTargetSize: MaterialTapTargetSize.padded,
                     splashFactory: NoSplash.splashFactory,
                   ),
-                  onPressed: () => context
-                      .read<CalendarBloc>()
-                      .add(CalendarEventOnSelectedDay(day)),
+                  onPressed: () {
+                    changeSelectedDate(day);
+                    getPillsByDay(day);
+                  },
                   child: Text(
                     "${day.day}",
                     style: TextFonts.body1.copyWith(
