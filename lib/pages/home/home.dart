@@ -60,11 +60,13 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            color: ColorPackage.defaultPrimary,
-            child: const Padding(
-              padding: EdgeInsets.only(top: 16.0),
-              child: PillsList(),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Container(
+                color: ColorPackage.defaultPrimary,
+                child: const PillsList(),
+              ),
             ),
           ),
         ],
