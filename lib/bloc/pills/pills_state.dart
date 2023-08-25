@@ -9,3 +9,11 @@ class PillsState {
 class PillInitial extends PillsState {
   PillInitial() : super([]);
 }
+
+class PillLoading extends PillsState {
+  PillLoading() : super([]);
+}
+
+class PillEmpty extends PillsState {
+  PillEmpty() : super([]);
+}
