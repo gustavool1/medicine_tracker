@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medicine_tracker/repositories/repositories.dart';
 import 'package:medicine_tracker/ui/ui.dart';
 
 import 'bloc/bloc.dart';
@@ -15,7 +16,11 @@ class App extends StatelessWidget {
           create: (context) => HomeBloc(),
         ),
         BlocProvider<PillsBloc>(
-          create: (context) => PillsBloc(createPillBloc: CreatePillBloc()),
+          create: (context) => PillsBloc(
+            createPillBloc: CreatePillBloc(),
+            medicineRepository: MedicineRepository(),
+            pillRepository: PillRepository(),
+          ),
         ),
         BlocProvider<CalendarBloc>(
           create: (context) => CalendarBloc(),
