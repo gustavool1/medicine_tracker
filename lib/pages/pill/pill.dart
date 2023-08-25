@@ -21,16 +21,17 @@ class MedicationPage extends StatelessWidget {
         ),
       ),
       backgroundColor: ColorPackage.white,
-      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const PillImage(
+      body:
+          const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        PillImage(
           name: 'Dipirona',
         ),
-        const SizedBox(height: 30),
+        SizedBox(height: 30),
         Padding(
-          padding: const EdgeInsets.only(left: 15.0),
+          padding: EdgeInsets.only(left: 15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               PillDetail(
                 title: 'Nome',
                 description: 'Dipirona ',

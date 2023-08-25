@@ -6,14 +6,14 @@ class PillModel {
   final String timeToTake;
   final String name;
   final int amount;
-  bool isTakeit;
+  bool isTaken;
 
   PillModel({
     required this.id,
     required this.timeToTake,
     required this.name,
     required this.amount,
-    this.isTakeit = false,
+    this.isTaken = false,
   });
 
   factory PillModel.fromCreatePillToPillModel(CreatePill createPill) {
@@ -26,7 +26,7 @@ class PillModel {
   }
 
   void takePill() {
-    isTakeit = true;
+    isTaken = true;
   }
 
   String get amountLabel {
@@ -34,5 +34,14 @@ class PillModel {
       return '$amount Pilulas';
     }
     return '$amount Pilula';
+  }
+
+  factory PillModel.fromMap(Map<String, dynamic> map) {
+    return PillModel(
+        id: map['id'],
+        timeToTake: DateTime.parse(map['takePillDay']).toHoursMinutes,
+        name: map['name'],
+        amount: 2,
+        isTaken: map['isTaken']);
   }
 }

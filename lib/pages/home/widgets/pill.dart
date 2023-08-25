@@ -100,7 +100,7 @@ class Pill extends StatelessWidget {
               iconAndTime,
               typeAndQuantity,
               const Spacer(),
-              if (pill.isTakeit)
+              if (pill.isTaken)
                 const Padding(
                   padding: EdgeInsets.only(right: 10.0),
                   child: Icon(
