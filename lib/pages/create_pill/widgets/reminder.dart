@@ -42,7 +42,7 @@ class Reminder extends StatelessWidget {
               child: TextField(
                 controller: _timerTextEditingController,
                 decoration: InputDecoration(
-                  hintText: '30/08/2023',
+                  hintText: '6:30 AM',
                   contentPadding: const EdgeInsets.only(bottom: 5),
                   enabledBorder: const UnderlineInputBorder(
                     borderSide: BorderSide(color: ColorPackage.lightGray),
