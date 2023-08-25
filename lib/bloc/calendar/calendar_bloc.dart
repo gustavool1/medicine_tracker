@@ -4,22 +4,23 @@ import '../../models/models.dart';
 import 'calendar.dart';
 
 class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
-  static RangeDateTime rangeDateTime = RangeDateTime();
+  static CalendarModel calendar = CalendarModel(selectedDate: DateTime.now());
 
-  CalendarBloc() : super(CalendarState(rangeDateTime)) {
-    on<CalendarEventOnSelectedDayStart>(_onSelectedStartDay);
-    on<CalendarEventOnSelectedDayEnd>(_onSelectedEndDay);
+  CalendarBloc() : super(CalendarState(calendar)) {
+    on<CalendarEventOnSelectedDay>(_onSelectedDay);
+    on<CalendarEventChangeOpen>(_onChangeOpen);
   }
 
-  _onSelectedStartDay(
-      CalendarEventOnSelectedDayStart event, Emitter<CalendarState> emit) {
-    rangeDateTime = RangeDateTime(start: event.selectedDay);
-    emit(CalendarState(rangeDateTime));
+  _onSelectedDay(
+    CalendarEventOnSelectedDay event,
+    Emitter<CalendarState> emit,
+  ) {
+    calendar.selectedDate = event.selectedDay;
+    emit(CalendarState(calendar));
   }
 
-  _onSelectedEndDay(
-      CalendarEventOnSelectedDayEnd event, Emitter<CalendarState> emit) {
-    rangeDateTime = rangeDateTime.copyWith(end: event.selectedDay);
-    emit(CalendarState(rangeDateTime));
+  _onChangeOpen(CalendarEventChangeOpen event, Emitter<CalendarState> emit) {
+    calendar.isOpen = !calendar.isOpen;
+    emit(CalendarState(calendar));
   }
 }

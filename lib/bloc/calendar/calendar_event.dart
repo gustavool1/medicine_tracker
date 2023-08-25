@@ -1,11 +1,8 @@
 class CalendarEvent {}
 
-class CalendarEventOnSelectedDayStart extends CalendarEvent {
+class CalendarEventOnSelectedDay extends CalendarEvent {
   final DateTime selectedDay;
-  CalendarEventOnSelectedDayStart(this.selectedDay);
+  CalendarEventOnSelectedDay(this.selectedDay);
 }
 
-class CalendarEventOnSelectedDayEnd extends CalendarEvent {
-  final DateTime selectedDay;
-  CalendarEventOnSelectedDayEnd(this.selectedDay);
-}
+class CalendarEventChangeOpen extends CalendarEvent {}

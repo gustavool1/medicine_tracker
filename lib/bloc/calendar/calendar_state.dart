@@ -1,6 +1,6 @@
-import 'package:medicine_tracker/models/models.dart';
+import '../../models/models.dart';
 
 class CalendarState {
-  final RangeDateTime rangeDateTime;
-  CalendarState(this.rangeDateTime);
+  final CalendarModel calendar;
+  CalendarState(this.calendar);
 }
