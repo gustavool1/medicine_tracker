@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medicine_tracker/pages/sign_in/sign_in.dart';
 import 'package:medicine_tracker/repositories/repositories.dart';
-import 'package:medicine_tracker/ui/ui.dart';
 
 import 'bloc/bloc.dart';
 
@@ -12,6 +12,11 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<AuthBloc>(
+          create: (context) => AuthBloc(
+            authRepository: AuthRepository(),
+          ),
+        ),
         BlocProvider<HomeBloc>(
           create: (context) => HomeBloc(),
         ),
@@ -31,7 +36,7 @@ class App extends StatelessWidget {
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomePage(),
+        home: SignInPage(),
       ),
     );
   }
