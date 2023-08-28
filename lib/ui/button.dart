@@ -11,6 +11,8 @@ class Button extends StatelessWidget {
   final EdgeInsets? padding;
   final Icon? icon;
   final double borderRadius;
+  final bool isLoading;
+  final Color? loadingColor;
 
   const Button({
     required this.label,
@@ -19,6 +21,8 @@ class Button extends StatelessWidget {
     this.icon,
     this.padding,
     this.borderRadius = 5,
+    this.isLoading = false,
+    this.loadingColor,
     super.key,
   });
 
@@ -59,16 +63,26 @@ class Button extends StatelessWidget {
           ),
         ),
         onPressed: onTap,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (icon != null) ...[icon!, const SizedBox(width: 10)],
-            Text(
-              label,
-              style: TextFonts.body1.copyWith(color: ColorPackage.white),
-            )
-          ],
-        ),
+        child: isLoading
+            ? const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(
+                    color: ColorPackage.white,
+                    strokeWidth: 3,
+                  ),
+                ],
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (icon != null) ...[icon!, const SizedBox(width: 10)],
+                  Text(
+                    label,
+                    style: TextFonts.body1.copyWith(color: ColorPackage.white),
+                  )
+                ],
+              ),
       ),
     );
   }
