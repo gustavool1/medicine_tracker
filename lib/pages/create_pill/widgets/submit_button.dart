@@ -5,7 +5,8 @@ import '../../../bloc/bloc.dart';
 import '../../../ui/button.dart';
 
 class SubmitButton extends StatelessWidget {
-  const SubmitButton({super.key});
+  final GlobalKey<FormState> formKey;
+  const SubmitButton({super.key, required this.formKey});
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +15,12 @@ class SubmitButton extends StatelessWidget {
       return Button(
         label: 'Criar Medicamento',
         onTap: () {
-          context.read<PillsBloc>().add(PillsEventCreatePill(
-              createPill: createPillBloc.state.createPill));
+          context.read<PillsBloc>().add(
+                PillsEventCreatePill(
+                  createPill: createPillBloc.state.createPill,
+                  formKey: formKey,
+                ),
+              );
           Navigator.pop(context);
         },
       );

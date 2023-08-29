@@ -23,7 +23,7 @@ class MedicationPage extends StatelessWidget {
       backgroundColor: ColorPackage.white,
       body:
           const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        PillImage(
+        MedicineImage(
           name: 'Dipirona',
         ),
         SizedBox(height: 30),
@@ -32,15 +32,15 @@ class MedicationPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              PillDetail(
+              MedicineDetail(
                 title: 'Nome',
                 description: 'Dipirona ',
               ),
-              PillDetail(
+              MedicineDetail(
                 title: 'Quantidade de pilulas',
                 description: 'Dipirona ',
               ),
-              PillDetail(
+              MedicineDetail(
                 title: 'Lembretes',
                 description: 'Dipirona ',
               ),
