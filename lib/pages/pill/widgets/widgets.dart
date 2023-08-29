@@ -1,2 +1,2 @@
-export 'pill_detail.dart';
-export 'pill_image.dart';
+export 'medicine_detail.dart';
+export 'medicine_image.dart';

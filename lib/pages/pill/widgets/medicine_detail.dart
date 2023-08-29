@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:medicine_tracker/styles/styles.dart';
 
-class PillDetail extends StatelessWidget {
+class MedicineDetail extends StatelessWidget {
   final String title;
   final String description;
 
-  const PillDetail({required this.title, required this.description, super.key});
+  const MedicineDetail(
+      {required this.title, required this.description, super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -19,4 +19,12 @@ class MedicineRepository {
         },
         options: Options(headers: {"Authorization": "Bearer $token"}));
   }
+
+  getUserMedicines() async {
+    const storage = FlutterSecureStorage();
+    final token = await storage.read(key: 'USER-TOKEN');
+
+    _apiServices.api.get('medicines',
+        options: Options(headers: {"Authorization": "Bearer $token"}));
+  }
 }

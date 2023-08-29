@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../../styles/styles.dart';
 
-class PillImage extends StatelessWidget {
+class MedicineImage extends StatelessWidget {
   final String name;
 
-  const PillImage({required this.name, super.key});
+  const MedicineImage({required this.name, super.key});
 
   @override
   Widget build(BuildContext context) {
