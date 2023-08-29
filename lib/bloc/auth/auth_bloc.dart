@@ -18,7 +18,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(SignInLoading());
       try {
         final accessToken = await authRepository.signIn(event.signInData);
-        await Future.delayed(const Duration(seconds: 3));
+        await Future.delayed(const Duration(seconds: 1));
         if (accessToken.isNotEmpty) {
           const storage = FlutterSecureStorage();
           await storage.write(key: 'USER-TOKEN', value: accessToken);
