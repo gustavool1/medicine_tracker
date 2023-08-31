@@ -10,7 +10,7 @@ class PillsEventTakePill extends PillsEvent {
 }
 
 class PillsEventCreatePill extends PillsEvent {
-  final CreatePill createPill;
+  final Medicine createPill;
   final GlobalKey<FormState> formKey;
 
   PillsEventCreatePill({required this.createPill, required this.formKey});

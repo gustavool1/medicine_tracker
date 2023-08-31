@@ -7,12 +7,12 @@ import '../../models/models.dart';
 
 class PillsBloc extends Bloc<PillsEvent, PillsState> {
   static List<PillModel> _pills = [];
-  final CreatePillBloc createPillBloc;
+  final MedicineBloc medicineBloc;
   final MedicineRepository medicineRepository;
   final PillRepository pillRepository;
 
   PillsBloc({
-    required this.createPillBloc,
+    required this.medicineBloc,
     required this.medicineRepository,
     required this.pillRepository,
   }) : super(PillInitial()) {
