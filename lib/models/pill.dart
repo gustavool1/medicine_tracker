@@ -16,12 +16,12 @@ class PillModel {
     this.isTaken = false,
   });
 
-  factory PillModel.fromCreatePillToPillModel(CreatePill createPill) {
+  factory PillModel.fromMedicineModelToPillModel(Medicine medicine) {
     return PillModel(
-      amount: createPill.pillsAmount ?? 1,
-      id: createPill.name ?? '',
-      name: createPill.name ?? '',
-      timeToTake: createPill.reminderEveryDay?.toHoursMinutes ?? '',
+      amount: medicine.pillsAmount ?? 1,
+      id: medicine.name ?? '',
+      name: medicine.name ?? '',
+      timeToTake: medicine.reminders?[0].toHoursMinutes ?? '',
     );
   }
 

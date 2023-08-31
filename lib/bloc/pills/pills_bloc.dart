@@ -33,7 +33,7 @@ class PillsBloc extends Bloc<PillsEvent, PillsState> {
 
   _onCreatePill(PillsEventCreatePill event, Emitter<PillsState> emit) async {
     if (event.formKey.currentState?.validate() ?? false) {
-      final newPill = PillModel.fromCreatePillToPillModel(event.createPill);
+      final newPill = PillModel.fromMedicineModelToPillModel(event.createPill);
       _pills.add(newPill);
       await medicineRepository.createMedicine(event.createPill);
       emit(PillsState(_pills));
