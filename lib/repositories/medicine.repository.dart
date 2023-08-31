@@ -1,21 +1,24 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:medicine_tracker/api/api.dart';
+import 'package:medicine_tracker/helpers/extensions.dart';
 
-import '../models/create_pill_model.dart';
+import '../models/medicine.dart';
 
 class MedicineRepository {
   final _apiServices = ApiServices();
 
-  createMedicine(CreatePill medicine) async {
+  createMedicine(Medicine medicine) async {
     const storage = FlutterSecureStorage();
     final token = await storage.read(key: 'USER-TOKEN');
-
     await _apiServices.api.post('medicines',
         data: {
           'name': medicine.name,
           'frequency': medicine.pillsAmount,
-          'until': medicine.endTakingPill.toString()
+          'until': medicine.endTakingPill.toString(),
+          'reminders': medicine.reminders
+              ?.map((reminder) => reminder?.toHoursMinutes)
+              .toList(),
         },
         options: Options(headers: {"Authorization": "Bearer $token"}));
   }
