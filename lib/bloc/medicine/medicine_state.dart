@@ -1,1 +1,1 @@
-class CreatePillState {}
+class MedicineState {}
