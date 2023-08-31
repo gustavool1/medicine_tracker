@@ -5,7 +5,7 @@ import 'package:medicine_tracker/styles/colors.dart';
 import 'package:medicine_tracker/ui/calendar/calendar.dart';
 import '../../bloc/bloc.dart';
 import '../../ui/ui.dart';
-import '../create_pill/create_pill.dart';
+import '../create_medicine/create_medicine.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
             child: Column(
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     const Icon(
                       Icons.account_circle_rounded,
@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
                       onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (_) => const CreatePillPage())),
+                              builder: (_) => const CreateMedicinePage())),
                       child: const Icon(
                         Icons.add_circle_rounded,
                         color: ColorPackage.blue,

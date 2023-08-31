@@ -22,7 +22,7 @@ class App extends StatelessWidget {
         ),
         BlocProvider<PillsBloc>(
           create: (context) => PillsBloc(
-            createPillBloc: CreatePillBloc(),
+            medicineBloc: MedicineBloc(),
             medicineRepository: MedicineRepository(),
             pillRepository: PillRepository(),
           ),
@@ -30,8 +30,8 @@ class App extends StatelessWidget {
         BlocProvider<CalendarBloc>(
           create: (context) => CalendarBloc(),
         ),
-        BlocProvider<CreatePillBloc>(
-          create: (context) => CreatePillBloc(),
+        BlocProvider<MedicineBloc>(
+          create: (context) => MedicineBloc(),
         ),
       ],
       child: const MaterialApp(

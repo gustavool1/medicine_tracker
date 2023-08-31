@@ -4,7 +4,7 @@ class Medicine {
   String? name;
   DateTime? startTakingPill;
   DateTime? endTakingPill;
-  List<TimeOfDay>? reminders;
+  List<TimeOfDay?>? reminders;
   int? frequencyInHours;
   int? pillsAmount;
 
@@ -22,7 +22,7 @@ class Medicine {
     String? frequency,
     DateTime? startTakingPill,
     DateTime? endTakingPill,
-    List<TimeOfDay>? reminders,
+    List<TimeOfDay?>? reminders,
     int? frequencyInHours,
     int? pillsAmount,
   }) {

@@ -2,38 +2,39 @@ import 'package:flutter/material.dart';
 
 class MedicineEvent {}
 
-class CreatePillSetPillName extends MedicineEvent {
+class MedicineSetPillName extends MedicineEvent {
   String name;
 
-  CreatePillSetPillName(this.name);
+  MedicineSetPillName(this.name);
 }
 
-class CreatePillSetStartDate extends MedicineEvent {
+class MedicineSetStartDate extends MedicineEvent {
   DateTime startDate;
 
-  CreatePillSetStartDate(this.startDate);
+  MedicineSetStartDate(this.startDate);
 }
 
-class CreatePillSetEndDate extends MedicineEvent {
+class MedicineSetEndDate extends MedicineEvent {
   DateTime endDate;
 
-  CreatePillSetEndDate(this.endDate);
+  MedicineSetEndDate(this.endDate);
 }
 
-class CreatePillSetReminder extends MedicineEvent {
+class MedicineSetReminder extends MedicineEvent {
   TimeOfDay time;
+  int index;
 
-  CreatePillSetReminder(this.time);
+  MedicineSetReminder(this.time, this.index);
 }
 
-class CreatePillSetFrequency extends MedicineEvent {
+class MedicineSetFrequency extends MedicineEvent {
   int frequency;
 
-  CreatePillSetFrequency(this.frequency);
+  MedicineSetFrequency(this.frequency);
 }
 
-class CreatePillSetPillAmount extends MedicineEvent {
+class MedicineSetPillAmount extends MedicineEvent {
   int amount;
 
-  CreatePillSetPillAmount(this.amount);
+  MedicineSetPillAmount(this.amount);
 }

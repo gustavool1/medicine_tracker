@@ -17,8 +17,7 @@ class _CreateMedicinePageState extends State<CreateMedicinePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MedicineBloc, CreatePillState>(
-        builder: (context, state) {
+    return BlocBuilder<MedicineBloc, MedicineState>(builder: (context, state) {
       return Scaffold(
         appBar: AppBar(
           title: const Text('Medicamento'),
@@ -34,10 +33,11 @@ class _CreateMedicinePageState extends State<CreateMedicinePage> {
                 const RegisterPillName(),
                 const FrequencyPill(),
                 const PillsAmount(),
-                // if (state..pillsAmount != 1)
-                //   const MultipleReminders(),
-                SelectDates(),
-                // if (state.createPill.pillsAmount == 1) Reminder(),
+                if ((state.medicine.pillsAmount ?? 0) > 1)
+                  const MultipleReminders(),
+                const SelectDates(),
+                if ((state.medicine.pillsAmount ?? 1) == 1)
+                  const Reminder(index: 0),
                 const Expanded(child: SizedBox()),
                 SubmitButton(formKey: formKey)
               ],

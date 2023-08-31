@@ -21,7 +21,7 @@ class PillModel {
       amount: medicine.pillsAmount ?? 1,
       id: medicine.name ?? '',
       name: medicine.name ?? '',
-      timeToTake: medicine.reminders?[0].toHoursMinutes ?? '',
+      timeToTake: medicine.reminders?[0]?.toHoursMinutes ?? '',
     );
   }
 
@@ -38,10 +38,11 @@ class PillModel {
 
   factory PillModel.fromMap(Map<String, dynamic> map) {
     return PillModel(
-        id: map['id'],
-        timeToTake: DateTime.parse(map['takePillDay']).toHoursMinutes,
-        name: map['name'],
-        amount: 2,
-        isTaken: map['isTaken']);
+      id: map['id'],
+      timeToTake: map['takePillHour'],
+      name: map['name'],
+      amount: 2,
+      isTaken: map['isTaken'],
+    );
   }
 }
