@@ -44,8 +44,11 @@ class PillsList extends StatelessWidget {
           ),
         );
       } else {
-        return Column(
-          children: state.pills.map((pill) => Pill(pill: pill)).toList(),
+        return SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: state.pills.map((pill) => Pill(pill: pill)).toList(),
+          ),
         );
       }
     });
