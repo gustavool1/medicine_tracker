@@ -8,19 +8,26 @@ import '../models/medicine.dart';
 class MedicineRepository {
   final _apiServices = ApiServices();
 
-  createMedicine(Medicine medicine) async {
+  Future<Medicine> createMedicine(Medicine medicine) async {
     const storage = FlutterSecureStorage();
     final token = await storage.read(key: 'USER-TOKEN');
-    await _apiServices.api.post('medicines',
-        data: {
-          'name': medicine.name,
-          'frequency': medicine.pillsAmount,
-          'until': medicine.endTakingPill.toString(),
-          'reminders': medicine.reminders
-              ?.map((reminder) => reminder?.toHoursMinutes)
-              .toList(),
-        },
-        options: Options(headers: {"Authorization": "Bearer $token"}));
+
+    final response = await _apiServices.api.post(
+      'medicines',
+      data: {
+        'name': medicine.name,
+        'frequency': medicine.pillsAmount,
+        'until': medicine.endTakingPill.toString(),
+        'reminders': medicine.reminders
+            ?.map((reminder) => reminder?.toHoursMinutes)
+            .toList(),
+      },
+      options: Options(
+        headers: {"Authorization": "Bearer $token"},
+      ),
+    );
+
+    return Medicine.fromJson(response.data);
   }
 
   getUserMedicines() async {
