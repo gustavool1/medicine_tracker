@@ -35,7 +35,11 @@ class PillsBloc extends Bloc<PillsEvent, PillsState> {
     if (event.formKey.currentState?.validate() ?? false) {
       final newPill = PillModel.fromMedicineModelToPillModel(event.createPill);
       _pills.add(newPill);
-      await medicineRepository.createMedicine(event.createPill);
+
+      final medicine =
+          await medicineRepository.createMedicine(event.createPill);
+      medicine.setAlarmForAllPills();
+
       emit(PillsState(_pills));
     }
   }

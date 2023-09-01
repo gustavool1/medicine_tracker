@@ -1,9 +1,15 @@
+import 'dart:math';
+
+import 'package:alarm/alarm.dart';
 import 'package:medicine_tracker/helpers/extensions.dart';
 import 'package:medicine_tracker/models/models.dart';
+
+import '../styles/styles.dart';
 
 class PillModel {
   final String id;
   final String timeToTake;
+  final DateTime takePillDay;
   final String name;
   final int amount;
   bool isTaken;
@@ -11,6 +17,7 @@ class PillModel {
   PillModel({
     required this.id,
     required this.timeToTake,
+    required this.takePillDay,
     required this.name,
     required this.amount,
     this.isTaken = false,
@@ -22,6 +29,7 @@ class PillModel {
       id: medicine.name ?? '',
       name: medicine.name ?? '',
       timeToTake: medicine.reminders?[0]?.toHoursMinutes ?? '',
+      takePillDay: DateTime.now(),
     );
   }
 
@@ -40,9 +48,35 @@ class PillModel {
     return PillModel(
       id: map['id'],
       timeToTake: map['takePillHour'],
+      takePillDay: DateTime.parse(map['takePillDay']),
       name: map['name'],
       amount: 2,
       isTaken: map['isTaken'],
     );
+  }
+
+  void setAlarm() {
+    final hoursAndMinutes = timeToTake.split(":");
+
+    final hourToRing = DateTime(
+      takePillDay.year,
+      takePillDay.month,
+      takePillDay.day,
+      int.parse(hoursAndMinutes[0]),
+      int.parse(hoursAndMinutes[1]),
+    );
+
+    final alarmSettings = AlarmSettings(
+      id: generateRandomNumber(),
+      dateTime: hourToRing,
+      assetAudioPath: Audios.dendenmushi,
+      volumeMax: true,
+    );
+    Alarm.set(alarmSettings: alarmSettings);
+  }
+
+  int generateRandomNumber() {
+    final random = Random();
+    return random.nextInt(10000) + 1;
   }
 }
