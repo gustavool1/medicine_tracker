@@ -43,12 +43,14 @@ class MedicineBloc extends Bloc<MedicineEvent, MedicineState> {
   }
 
   void _onSetReminder(MedicineSetReminder event, Emitter<MedicineState> emit) {
+    medicine.reminders ??= [];
     if (medicine.reminders?.length != medicine.pillsAmount) {
       for (var i = 0; i < (medicine.pillsAmount ?? 1); i++) {
         if (i == 0) medicine.reminders = [];
         medicine.reminders?.add(null);
       }
     }
+
     medicine.reminders?[event.index] = event.time;
     emit(MedicineState(medicine));
   }
