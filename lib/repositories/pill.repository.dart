@@ -21,7 +21,7 @@ class PillRepository {
     return pills;
   }
 
-  Future<bool> takePill(String pillId) async {
+  Future<bool> takePill(int pillId) async {
     const storage = FlutterSecureStorage();
     final token = await storage.read(key: 'USER-TOKEN');
 
@@ -32,5 +32,14 @@ class PillRepository {
       return true;
     }
     return false;
+  }
+
+  Future<PillModel> getPillById(int pillId) async {
+    const storage = FlutterSecureStorage();
+    final token = await storage.read(key: 'USER-TOKEN');
+
+    final response = await _apiServices.api.get('pill/$pillId',
+        options: Options(headers: {"Authorization": "Bearer $token"}));
+    return PillModel.fromMap(response.data as Map<String, dynamic>);
   }
 }

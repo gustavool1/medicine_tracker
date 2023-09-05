@@ -5,7 +5,7 @@ import '../../models/models.dart';
 class PillsEvent {}
 
 class PillsEventTakePill extends PillsEvent {
-  final String pillId;
+  final int pillId;
   PillsEventTakePill({required this.pillId});
 }
 
