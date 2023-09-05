@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:medicine_tracker/bloc/bloc.dart';
 import 'package:medicine_tracker/helpers/extensions.dart';
 import 'package:medicine_tracker/repositories/repositories.dart';
@@ -32,14 +34,31 @@ class PillsBloc extends Bloc<PillsEvent, PillsState> {
   }
 
   _onCreatePill(PillsEventCreatePill event, Emitter<PillsState> emit) async {
-    if (event.formKey.currentState?.validate() ?? false) {
-      final newPill = PillModel.fromMedicineModelToPillModel(event.createPill);
-      _pills.add(newPill);
+    emit(PillLoadingCreation());
+    await Future.delayed(const Duration(seconds: 1));
 
+    if (event.formKey.currentState?.validate() ?? false) {
       final medicine =
           await medicineRepository.createMedicine(event.createPill);
       medicine.setAlarmForAllPills();
 
+      medicine.pills?.forEach((pill) {
+        final today = DateTime.now();
+        if (pill.takePillDay.day == today.day &&
+            pill.takePillDay.month == today.month &&
+            pill.takePillDay.year == today.year) {
+          _pills.add(pill);
+        }
+      });
+
+      Fluttertoast.showToast(
+        msg: "Medicamento criado com sucesso",
+        toastLength: Toast.LENGTH_SHORT,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+      );
+
+      emit(PillCreatedSuccessfuly());
       emit(PillsState(_pills));
     }
   }
