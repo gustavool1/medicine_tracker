@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:alarm/alarm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:medicine_tracker/models/models.dart';
 import 'package:medicine_tracker/pages/medicines/medicines.dart';
 import 'package:medicine_tracker/styles/colors.dart';
 import 'package:medicine_tracker/ui/calendar/calendar.dart';
@@ -34,13 +33,7 @@ class _HomePageState extends State<HomePage> {
       context,
       MaterialPageRoute(
         builder: (_) => MedicineActions(
-          pill: PillModel(
-              id: '',
-              amount: 2,
-              name: 'teste',
-              takePillDay: DateTime.now(),
-              timeToTake: '14:30',
-              isTaken: false),
+          alarmPillId: id,
         ),
       ),
     );

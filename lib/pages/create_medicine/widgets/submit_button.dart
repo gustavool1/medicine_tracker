@@ -10,20 +10,30 @@ class SubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PillsBloc, PillsState>(builder: (context, state) {
-      final medicineBloc = context.read<MedicineBloc>();
-      return Button(
-        label: 'Criar Medicamento',
-        onTap: () {
-          context.read<PillsBloc>().add(
-                PillsEventCreatePill(
-                  createPill: medicineBloc.state.medicine,
-                  formKey: formKey,
-                ),
-              );
+    return BlocListener(
+      bloc: BlocProvider.of<PillsBloc>(context),
+      listener: (context, state) {
+        if (state is PillCreatedSuccessfuly) {
           Navigator.pop(context);
+        }
+      },
+      child: BlocBuilder<PillsBloc, PillsState>(
+        builder: (context, state) {
+          final medicineBloc = context.read<MedicineBloc>();
+          return Button(
+            label: 'Criar Medicamento',
+            isLoading: state is PillLoadingCreation,
+            onTap: () {
+              context.read<PillsBloc>().add(
+                    PillsEventCreatePill(
+                      createPill: medicineBloc.state.medicine,
+                      formKey: formKey,
+                    ),
+                  );
+            },
+          );
         },
-      );
-    });
+      ),
+    );
   }
 }
