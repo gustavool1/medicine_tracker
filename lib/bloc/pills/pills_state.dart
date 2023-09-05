@@ -17,3 +17,11 @@ class PillLoading extends PillsState {
 class PillEmpty extends PillsState {
   PillEmpty() : super([]);
 }
+
+class PillLoadingCreation extends PillsState {
+  PillLoadingCreation() : super([]);
+}
+
+class PillCreatedSuccessfuly extends PillsState {
+  PillCreatedSuccessfuly() : super([]);
+}
