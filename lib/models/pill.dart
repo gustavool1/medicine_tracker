@@ -7,7 +7,7 @@ import 'package:medicine_tracker/models/models.dart';
 import '../styles/styles.dart';
 
 class PillModel {
-  final String id;
+  final int id;
   final String timeToTake;
   final DateTime takePillDay;
   final String name;
@@ -26,7 +26,7 @@ class PillModel {
   factory PillModel.fromMedicineModelToPillModel(Medicine medicine) {
     return PillModel(
       amount: medicine.pillsAmount ?? 1,
-      id: medicine.name ?? '',
+      id: 0,
       name: medicine.name ?? '',
       timeToTake: medicine.reminders?[0]?.toHoursMinutes ?? '',
       takePillDay: DateTime.now(),
@@ -55,6 +55,17 @@ class PillModel {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'timeToTake': timeToTake,
+      'takePillDay': takePillDay.toIso8601String(),
+      'name': name,
+      'amount': amount,
+      'isTaken': isTaken,
+    };
+  }
+
   void setAlarm() {
     final hoursAndMinutes = timeToTake.split(":");
 
@@ -67,10 +78,9 @@ class PillModel {
     );
 
     final alarmSettings = AlarmSettings(
-      id: generateRandomNumber(),
+      id: id,
       dateTime: hourToRing,
       assetAudioPath: Audios.dendenmushi,
-      volumeMax: true,
     );
     Alarm.set(alarmSettings: alarmSettings);
   }
