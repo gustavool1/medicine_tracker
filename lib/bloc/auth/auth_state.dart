@@ -4,14 +4,26 @@ class AuthState {
 
 class AuthInitial extends AuthState {}
 
-class SignInSucess extends AuthState {
-  SignInSucess() : super();
+class AuthSignInSuccess extends AuthState {
+  AuthSignInSuccess() : super();
 }
 
-class SignInFailed extends AuthState {
-  SignInFailed() : super();
+class AuthSignInFailed extends AuthState {
+  AuthSignInFailed() : super();
 }
 
-class SignInLoading extends AuthState {
-  SignInLoading() : super();
+class AuthSignInLoading extends AuthState {
+  AuthSignInLoading() : super();
+}
+
+class AuthRegisterSuccess extends AuthState {
+  AuthRegisterSuccess() : super();
+}
+
+class AuthRegisterFailed extends AuthState {
+  AuthRegisterFailed() : super();
+}
+
+class AuthRegisterLoading extends AuthState {
+  AuthRegisterLoading() : super();
 }
