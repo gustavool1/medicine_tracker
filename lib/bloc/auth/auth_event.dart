@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:medicine_tracker/bloc/auth/models/sign_in.model.dart';
+import 'package:medicine_tracker/bloc/auth/models/user_data.model.dart';
 
 class AuthEvent {}
 
 class SignInEvent extends AuthEvent {
-  final SignInModel signInData;
+  final UserDataModel signInData;
   final GlobalKey<FormState> formKey;
 
   SignInEvent({
@@ -14,7 +14,7 @@ class SignInEvent extends AuthEvent {
 }
 
 class RegisterEvent extends AuthEvent {
-  final SignInModel signInData;
+  final UserDataModel signInData;
   final GlobalKey<FormState> formKey;
 
   RegisterEvent({

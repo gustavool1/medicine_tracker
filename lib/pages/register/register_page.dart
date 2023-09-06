@@ -5,7 +5,7 @@ import 'package:medicine_tracker/bloc/auth/auth_state.dart';
 import 'package:medicine_tracker/pages/register/widgets/widgets.dart';
 
 import '../../bloc/auth/auth_event.dart';
-import '../../bloc/auth/models/sign_in.model.dart';
+import '../../bloc/auth/models/user_data.model.dart';
 import '../../ui/ui.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -21,9 +21,9 @@ class _RegisterPageState extends State<RegisterPage> {
       );
 
   TextEditingController textFieldEmailController = TextEditingController();
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   TextEditingController textFieldPasswordController = TextEditingController();
+  TextEditingController textFieldNameController = TextEditingController();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +31,10 @@ class _RegisterPageState extends State<RegisterPage> {
       void onSubmit() {
         context.read<AuthBloc>().add(
               RegisterEvent(
-                signInData: SignInModel(
+                signInData: UserDataModel(
                   email: textFieldEmailController.text,
                   password: textFieldPasswordController.text,
+                  name: textFieldNameController.text,
                 ),
                 formKey: formKey,
               ),
@@ -61,6 +62,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: FormFields(
                       textFieldEmailController: textFieldEmailController,
                       textFieldPasswordController: textFieldPasswordController,
+                      additionalFields: [
+                        NameTextField(controller: textFieldNameController),
+                      ],
                     ),
                   ),
                   SubmitButton(onSubmit: onSubmit),

@@ -4,7 +4,7 @@ import 'package:medicine_tracker/bloc/auth/auth_bloc.dart';
 import 'package:medicine_tracker/bloc/auth/auth_state.dart';
 
 import '../../bloc/auth/auth_event.dart';
-import '../../bloc/auth/models/sign_in.model.dart';
+import '../../bloc/auth/models/user_data.model.dart';
 import 'widgets/widgets.dart';
 
 class SignInPage extends StatefulWidget {
@@ -30,7 +30,7 @@ class _SignInPageState extends State<SignInPage> {
       void onSubmit() {
         context.read<AuthBloc>().add(
               SignInEvent(
-                signInData: SignInModel(
+                signInData: UserDataModel(
                   email: textFieldEmailController.text,
                   password: textFieldPasswordController.text,
                 ),

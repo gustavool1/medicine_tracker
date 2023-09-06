@@ -1,11 +1,11 @@
-import 'package:medicine_tracker/bloc/auth/models/sign_in.model.dart';
+import 'package:medicine_tracker/bloc/auth/models/user_data.model.dart';
 
 import '../api/api.dart';
 
 class AuthRepository {
   final _apiServices = ApiServices();
 
-  Future<String> signIn(SignInModel signInData) async {
+  Future<String> signIn(UserDataModel signInData) async {
     try {
       final response = await _apiServices.api.post(
         'users/signIn',
@@ -17,11 +17,11 @@ class AuthRepository {
     }
   }
 
-  Future<dynamic> register(SignInModel registerData) async {
+  Future<dynamic> register(UserDataModel registerData) async {
     try {
       await _apiServices.api.post(
         'users',
-        data: registerData.toJson(),
+        data: {...registerData.toJson()},
       );
     } catch (_) {
       throw Exception();
