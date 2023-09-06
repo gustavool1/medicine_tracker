@@ -16,4 +16,15 @@ class AuthRepository {
       throw Exception();
     }
   }
+
+  Future<dynamic> register(SignInModel registerData) async {
+    try {
+      await _apiServices.api.post(
+        'users',
+        data: registerData.toJson(),
+      );
+    } catch (_) {
+      throw Exception();
+    }
+  }
 }
