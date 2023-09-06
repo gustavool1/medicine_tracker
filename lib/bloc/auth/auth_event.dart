@@ -12,3 +12,13 @@ class SignInEvent extends AuthEvent {
     required this.formKey,
   }) : super();
 }
+
+class RegisterEvent extends AuthEvent {
+  final SignInModel signInData;
+  final GlobalKey<FormState> formKey;
+
+  RegisterEvent({
+    required this.signInData,
+    required this.formKey,
+  }) : super();
+}

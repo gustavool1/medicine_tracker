@@ -14,19 +14,22 @@ class SignInButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state is SignInSucess) {
+        if (state is AuthSignInSuccess) {
           Navigator.push(
               context, MaterialPageRoute(builder: (_) => const HomePage()));
         }
       },
       child: BlocBuilder<AuthBloc, AuthState>(
         builder: (context, state) {
-          return SizedBox(
-            height: 60,
-            child: Button(
-              label: 'Entrar',
-              onTap: onSubmit,
-              isLoading: state is SignInLoading,
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: SizedBox(
+              height: 60,
+              child: Button(
+                label: 'Entrar',
+                onTap: onSubmit,
+                isLoading: state is AuthSignInLoading,
+              ),
             ),
           );
         },
