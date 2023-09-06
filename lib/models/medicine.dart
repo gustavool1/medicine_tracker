@@ -7,7 +7,6 @@ class Medicine {
   DateTime? startTakingPill;
   DateTime? endTakingPill;
   List<TimeOfDay?>? reminders;
-  int? frequencyInHours;
   int? pillsAmount;
   List<PillModel>? pills;
 
@@ -17,7 +16,6 @@ class Medicine {
     this.startTakingPill,
     this.endTakingPill,
     this.reminders,
-    this.frequencyInHours,
     this.pillsAmount = 1,
     this.pills,
   });
@@ -29,7 +27,6 @@ class Medicine {
     DateTime? startTakingPill,
     DateTime? endTakingPill,
     List<TimeOfDay?>? reminders,
-    int? frequencyInHours,
     int? pillsAmount,
     List<PillModel>? pills,
   }) {
@@ -39,7 +36,6 @@ class Medicine {
       startTakingPill: startTakingPill,
       endTakingPill: endTakingPill,
       reminders: reminders,
-      frequencyInHours: frequencyInHours,
       pillsAmount: pillsAmount,
       pills: pills,
     );
@@ -49,7 +45,6 @@ class Medicine {
     return Medicine(
       id: map['id'],
       name: map['name'],
-      frequencyInHours: map['frequencyfrequency'],
       pillsAmount: map['frequency'],
       endTakingPill: DateTime.parse(map['until']),
       pills: (map['pills'] as List<dynamic>)
