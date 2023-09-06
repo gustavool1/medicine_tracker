@@ -39,20 +39,33 @@ class _SignInPageState extends State<SignInPage> {
             );
       }
 
-      return Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                EmailTextField(controller: textFieldEmailController),
-                separator,
-                PasswordTextField(controller: textFieldPasswordController),
-                separator,
-                SignInButton(onSubmit: onSubmit),
-              ],
+      return SafeArea(
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Expanded(
+                      child: Header(
+                    title: 'Bem vindo de volta',
+                    message:
+                        'Ficamos animados em tê-lo de volta! Mal podemos esperar para ajudá-lo a lembrar de tomar seus medicamentos e ver como você tem se sentido desde a última vez que os tomou.',
+                  )),
+                  Expanded(
+                    flex: 2,
+                    child: FormFields(
+                      textFieldEmailController: textFieldEmailController,
+                      textFieldPasswordController: textFieldPasswordController,
+                    ),
+                  ),
+                  SignInButton(onSubmit: onSubmit),
+                  const RegisterCall(),
+                ],
+              ),
             ),
           ),
         ),

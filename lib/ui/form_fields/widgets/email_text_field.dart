@@ -21,15 +21,26 @@ class EmailTextField extends StatelessWidget {
       ),
       decoration: InputDecoration(
         hintText: 'Email',
-        contentPadding: const EdgeInsets.only(bottom: 5),
-        enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorPackage.lightGray),
+        filled: true,
+        contentPadding: const EdgeInsets.all(16),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ColorPackage.lightGray,
+          ),
         ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorPackage.lightGray),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ColorPackage.lightGray,
+          ),
         ),
         hintStyle: TextFonts.body1.copyWith(
-          color: ColorPackage.lightGray,
+          color: ColorPackage.hint,
+        ),
+        border: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ColorPackage.lightGray,
+            style: BorderStyle.none,
+          ),
         ),
       ),
     );

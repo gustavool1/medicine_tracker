@@ -12,22 +12,31 @@ class PasswordTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      obscureText: true,
-      enableSuggestions: false,
-      autocorrect: false,
       controller: controller,
+      obscureText: true,
       validator: MultiValidator([DefaultRequiredValidator()]),
       decoration: InputDecoration(
+        filled: true,
         hintText: 'Senha',
-        contentPadding: const EdgeInsets.only(bottom: 5),
-        enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorPackage.lightGray),
+        contentPadding: const EdgeInsets.all(16),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ColorPackage.lightGray,
+          ),
         ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorPackage.lightGray),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ColorPackage.lightGray,
+          ),
         ),
         hintStyle: TextFonts.body1.copyWith(
-          color: ColorPackage.lightGray,
+          color: ColorPackage.hint,
+        ),
+        border: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ColorPackage.lightGray,
+            style: BorderStyle.none,
+          ),
         ),
       ),
     );
