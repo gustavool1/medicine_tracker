@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medicine_tracker/bloc/bloc.dart';
+import 'package:medicine_tracker/helpers/validators/required.validator.dart';
 
 import '../../../styles/styles.dart';
 
@@ -53,8 +54,9 @@ class _ReminderState extends State<Reminder> {
             ),
             const Spacer(),
             Expanded(
-              child: TextField(
+              child: TextFormField(
                 controller: _timerTextEditingController,
+                validator: DefaultRequiredValidator(),
                 decoration: InputDecoration(
                   hintText: '6:30 AM',
                   contentPadding: const EdgeInsets.only(bottom: 5),
