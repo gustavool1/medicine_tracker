@@ -24,6 +24,14 @@ dependencies:
   flutter_secure_storage: ^8.0.0
   alarm: ^1.2.2
   fluttertoast: ^8.2.2
+  flutter_native_splash: ^2.3.2
+
+
+flutter_native_splash:
+  color: "#3F51B5"
+  image: "assets/images/logo.png"
+  android: true
+
 
 dev_dependencies:
   flutter_test:
