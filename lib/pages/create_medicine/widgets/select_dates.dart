@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medicine_tracker/helpers/extensions.dart';
+import 'package:medicine_tracker/helpers/validators/required.validator.dart';
 
 import '../../../bloc/bloc.dart';
 import '../../../styles/styles.dart';
@@ -46,8 +47,9 @@ class _SelectDatesState extends State<SelectDates> {
             ),
             const Spacer(),
             Expanded(
-              child: TextField(
+              child: TextFormField(
                   controller: _textEditingControllerStartDate,
+                  validator: DefaultRequiredValidator(),
                   decoration: InputDecoration(
                     hintText: '30/08/2023',
                     contentPadding: const EdgeInsets.only(bottom: 5),
@@ -111,8 +113,9 @@ class _SelectDatesState extends State<SelectDates> {
             ),
             const Spacer(),
             Expanded(
-              child: TextField(
+              child: TextFormField(
                   controller: _textEditingControllerEndDate,
+                  validator: DefaultRequiredValidator(),
                   decoration: InputDecoration(
                     hintText: '07/09/2023',
                     contentPadding: const EdgeInsets.only(bottom: 5),
