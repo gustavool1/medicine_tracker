@@ -31,7 +31,6 @@ class _CreateMedicinePageState extends State<CreateMedicinePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const RegisterPillName(),
-                const FrequencyPill(),
                 const PillsAmount(),
                 if ((state.medicine.pillsAmount ?? 0) > 1)
                   const MultipleReminders(),
