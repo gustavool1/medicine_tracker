@@ -7,7 +7,6 @@ class MedicineBloc extends Bloc<MedicineEvent, MedicineState> {
   static Medicine medicine = Medicine();
   MedicineBloc() : super(MedicineState(medicine)) {
     on<MedicineSetPillName>(_onMedicineSetPillName);
-    on<MedicineSetFrequency>(_onSetFrequency);
     on<MedicineSetPillAmount>(_onSetAmount);
     on<MedicineSetStartDate>(_onSetStartDate);
     on<MedicineSetEndDate>(_onSetEndDate);
@@ -17,12 +16,6 @@ class MedicineBloc extends Bloc<MedicineEvent, MedicineState> {
   _onMedicineSetPillName(
       MedicineSetPillName event, Emitter<MedicineState> emit) {
     medicine.name = event.name;
-    emit(MedicineState(medicine));
-  }
-
-  void _onSetFrequency(
-      MedicineSetFrequency event, Emitter<MedicineState> emit) {
-    medicine.frequencyInHours = event.frequency;
     emit(MedicineState(medicine));
   }
 

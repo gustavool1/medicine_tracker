@@ -27,12 +27,6 @@ class MedicineSetReminder extends MedicineEvent {
   MedicineSetReminder(this.time, this.index);
 }
 
-class MedicineSetFrequency extends MedicineEvent {
-  int frequency;
-
-  MedicineSetFrequency(this.frequency);
-}
-
 class MedicineSetPillAmount extends MedicineEvent {
   int amount;
 
