@@ -19,6 +19,7 @@ class EmailTextField extends StatelessWidget {
           DefaultRequiredValidator(),
         ],
       ),
+      autofillHints: const [AutofillHints.email],
       decoration: InputDecoration(
         hintText: 'Email',
         filled: true,

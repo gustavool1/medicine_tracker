@@ -14,13 +14,14 @@ class NameTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]"))],
+      inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]"))],
       validator: MultiValidator(
         [
           DefaultRequiredValidator(),
           MaxLengthValidator(30, errorText: 'Limite de caracteres atingido'),
         ],
       ),
+      autofillHints: const [AutofillHints.name],
       decoration: InputDecoration(
         hintText: 'Nome Completo',
         filled: true,

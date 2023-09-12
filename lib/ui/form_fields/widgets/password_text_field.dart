@@ -15,6 +15,7 @@ class PasswordTextField extends StatelessWidget {
       controller: controller,
       obscureText: true,
       validator: MultiValidator([DefaultRequiredValidator()]),
+      autofillHints: const [AutofillHints.password],
       decoration: InputDecoration(
         filled: true,
         hintText: 'Senha',
