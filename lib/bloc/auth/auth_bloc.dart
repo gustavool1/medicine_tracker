@@ -21,7 +21,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthSignInLoading());
       try {
         final accessToken = await authRepository.signIn(event.signInData);
-        await Future.delayed(const Duration(seconds: 1));
         if (accessToken.isNotEmpty) {
           const storage = FlutterSecureStorage();
           await storage.write(key: 'USER-TOKEN', value: accessToken);
@@ -30,7 +29,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(AuthSignInSuccess());
         }
       } catch (_) {
-        await Future.delayed(const Duration(seconds: 1));
         emit(AuthSignInFailed());
         Fluttertoast.showToast(
           msg: "Suas credenciais estão incorretas",
@@ -48,7 +46,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthRegisterLoading());
       try {
         await authRepository.register(event.signInData);
-        await Future.delayed(const Duration(seconds: 2));
 
         Fluttertoast.showToast(
           msg: "Sua conta foi criada com sucesso",

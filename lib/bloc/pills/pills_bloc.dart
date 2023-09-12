@@ -35,7 +35,6 @@ class PillsBloc extends Bloc<PillsEvent, PillsState> {
 
   _onCreatePill(PillsEventCreatePill event, Emitter<PillsState> emit) async {
     emit(PillLoadingCreation());
-    await Future.delayed(const Duration(seconds: 1));
 
     if (event.formKey.currentState?.validate() ?? false) {
       final medicine =
@@ -67,7 +66,6 @@ class PillsBloc extends Bloc<PillsEvent, PillsState> {
       PillsEventGetPillsByDay event, Emitter<PillsState> emit) async {
     emit(PillLoading());
     _pills = await pillRepository.getPillsByDay(event.day.yMD);
-    await Future.delayed(const Duration(seconds: 1));
 
     if (_pills.isEmpty) {
       emit(PillEmpty());
