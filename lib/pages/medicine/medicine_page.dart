@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:medicine_tracker/helpers/extensions.dart';
+import 'package:medicine_tracker/models/models.dart';
 import 'package:medicine_tracker/styles/styles.dart';
 
 import 'widgets/widgets.dart';
 
 class MedicationPage extends StatelessWidget {
-  const MedicationPage({super.key});
+  final Medicine medicine;
+
+  const MedicationPage({required this.medicine, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,29 +25,25 @@ class MedicationPage extends StatelessWidget {
         ),
       ),
       backgroundColor: ColorPackage.white,
-      body:
-          const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         MedicineImage(
-          name: 'Dipirona',
+          name: medicine.name?.capitalize ?? '',
         ),
-        SizedBox(height: 30),
+        const SizedBox(height: 30),
         Padding(
-          padding: EdgeInsets.only(left: 15.0),
+          padding: const EdgeInsets.only(left: 15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               MedicineDetail(
                 title: 'Nome',
-                description: 'Dipirona ',
+                description: medicine.name?.capitalize ?? '',
               ),
               MedicineDetail(
                 title: 'Quantidade de pilulas',
-                description: 'Dipirona ',
+                description: medicine.pillsAmount.toString(),
               ),
-              MedicineDetail(
-                title: 'Lembretes',
-                description: 'Dipirona ',
-              ),
+              MedicineReminder(pills: medicine.pills ?? [])
             ],
           ),
         ),

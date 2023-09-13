@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:medicine_tracker/pages/pill/pill.dart';
+import 'package:medicine_tracker/helpers/extensions.dart';
+import 'package:medicine_tracker/pages/medicine/medicine_page.dart';
 import 'package:medicine_tracker/styles/styles.dart';
 
-class Medicine extends StatelessWidget {
-  const Medicine({super.key});
+import '../../../models/models.dart';
+
+class MedicineItem extends StatelessWidget {
+  final Medicine medicine;
+
+  const MedicineItem({required this.medicine, super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Navigator.push(
-          context, MaterialPageRoute(builder: (_) => const MedicationPage())),
+          context,
+          MaterialPageRoute(
+              builder: (_) => MedicationPage(medicine: medicine))),
       child: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40.0),
+            padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 10),
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
@@ -33,20 +40,12 @@ class Medicine extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(
                         top: 8.0, bottom: 8.0, left: 45.0),
-                    child: Column(children: [
-                      Text(
-                        'Vitamina C',
-                        style: TextFonts.head2.copyWith(
-                            color: ColorPackage.darkBlue,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        'Ibalgin 400',
-                        style: TextFonts.body1
-                            .copyWith(color: ColorPackage.lightGray),
-                      ),
-                    ]),
+                    child: Text(
+                      medicine.name?.capitalize ?? '',
+                      style: TextFonts.head2.copyWith(
+                          color: ColorPackage.darkBlue,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),
