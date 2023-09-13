@@ -8,5 +8,10 @@ extension DateFormatter on DateTime {
 }
 
 extension TimerFormatter on TimeOfDay {
-  String get toHoursMinutes => '$hour:$minute';
+  String get toHoursMinutes => '$hour:${minute == 0 ? '00' : minute}';
+}
+
+extension StringExtension on String {
+  String get capitalize =>
+      "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
 }
