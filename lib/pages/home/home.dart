@@ -62,32 +62,7 @@ class _HomePageState extends State<HomePage> {
                 bottomRight: Radius.circular(45),
               ),
             ),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    const Icon(
-                      Icons.account_circle_rounded,
-                      color: ColorPackage.blue,
-                      size: 40,
-                    ),
-                    GestureDetector(
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const CreateMedicinePage())),
-                      child: const Icon(
-                        Icons.add_circle_rounded,
-                        color: ColorPackage.blue,
-                        size: 40,
-                      ),
-                    )
-                  ],
-                ),
-                const Calendar(),
-              ],
-            ),
+            child: const Calendar(),
           ),
           Expanded(
             child: Padding(
@@ -106,9 +81,16 @@ class _HomePageState extends State<HomePage> {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         return Scaffold(
-          body: SafeArea(child: getContent(state.index, context)),
-          bottomNavigationBar: const BottomNavigator(),
-        );
+            body: SafeArea(child: getContent(state.index, context)),
+            bottomNavigationBar: const BottomNavigator(),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const CreateMedicinePage()),
+              ),
+              backgroundColor: ColorPackage.blue,
+              child: const Icon(Icons.add),
+            ));
       },
     );
   }
