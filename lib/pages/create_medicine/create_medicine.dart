@@ -22,6 +22,7 @@ class _CreateMedicinePageState extends State<CreateMedicinePage> {
         appBar: AppBar(
           title: const Text('Medicamento'),
         ),
+        resizeToAvoidBottomInset: false,
         body: Container(
           color: ColorPackage.defaultPrimary,
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
