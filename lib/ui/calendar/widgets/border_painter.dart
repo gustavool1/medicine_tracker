@@ -3,9 +3,11 @@ import 'package:medicine_tracker/styles/styles.dart';
 
 class BorderPainter extends CustomPainter {
   final double completedPercentage;
+  final bool isSelected;
 
   BorderPainter({
     required this.completedPercentage,
+    this.isSelected = false,
   });
 
   @override
@@ -19,7 +21,11 @@ class BorderPainter extends CustomPainter {
     final Path path = Path()
       ..addOval(rect)
       ..close();
-    if (completedPercentage == 1) {
+
+    if (isSelected) {
+      paint.color = ColorPackage.lightGray;
+      canvas.drawPath(path, paint);
+    } else if (completedPercentage == 1) {
       paint.color = ColorPackage.blue;
       canvas.drawPath(path, paint);
     } else {

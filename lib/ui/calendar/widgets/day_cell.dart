@@ -36,7 +36,10 @@ class DayCell extends StatelessWidget {
         child: Stack(
           children: [
             CustomPaint(
-              painter: BorderPainter(completedPercentage: completedPercentage),
+              painter: BorderPainter(
+                completedPercentage: completedPercentage,
+                isSelected: isThisDayCellSelected(state.calendar.selectedDate),
+              ),
               child: Container(
                 width: 50,
                 height: 40,
