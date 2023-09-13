@@ -84,9 +84,4 @@ class PillModel {
     );
     Alarm.set(alarmSettings: alarmSettings);
   }
-
-  int generateRandomNumber() {
-    final random = Random();
-    return random.nextInt(10000) + 1;
-  }
 }
