@@ -1,16 +1,26 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medicine_tracker/bloc/bloc.dart';
+import 'package:medicine_tracker/repositories/repositories.dart';
 
 import '../../models/medicine.dart';
-import 'medicine.dart';
 
 class MedicineBloc extends Bloc<MedicineEvent, MedicineState> {
   static Medicine medicine = Medicine();
-  MedicineBloc() : super(MedicineState(medicine)) {
+  static List<Medicine> medicines = [];
+
+  final MedicineRepository medicineRepository;
+  final AuthBloc authBloc;
+
+  MedicineBloc({
+    required this.authBloc,
+    required this.medicineRepository,
+  }) : super(MedicineState(medicine)) {
     on<MedicineSetPillName>(_onMedicineSetPillName);
     on<MedicineSetPillAmount>(_onSetAmount);
     on<MedicineSetStartDate>(_onSetStartDate);
     on<MedicineSetEndDate>(_onSetEndDate);
     on<MedicineSetReminder>(_onSetReminder);
+    on<MedicineGetMedicines>(_onGetMedicines);
   }
 
   _onMedicineSetPillName(
@@ -46,5 +56,12 @@ class MedicineBloc extends Bloc<MedicineEvent, MedicineState> {
 
     medicine.reminders?[event.index] = event.time;
     emit(MedicineState(medicine));
+  }
+
+  void _onGetMedicines(
+      MedicineGetMedicines event, Emitter<MedicineState> emit) async {
+    await Future.delayed(const Duration(seconds: 3));
+    medicines = await medicineRepository.getUserMedicines(authBloc.token);
+    emit(MedicineGottenSuccessfully(medicine, medicines));
   }
 }

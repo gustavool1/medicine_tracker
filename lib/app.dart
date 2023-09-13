@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:medicine_tracker/pages/sign_in/sign_in.dart';
+import 'package:medicine_tracker/pages/register/register_page.dart';
 import 'package:medicine_tracker/repositories/repositories.dart';
 
 import 'bloc/bloc.dart';
@@ -22,7 +22,10 @@ class App extends StatelessWidget {
         ),
         BlocProvider<PillsBloc>(
           create: (context) => PillsBloc(
-            medicineBloc: MedicineBloc(),
+            medicineBloc: MedicineBloc(
+              authBloc: context.read<AuthBloc>(),
+              medicineRepository: MedicineRepository(),
+            ),
             medicineRepository: MedicineRepository(),
             pillRepository: PillRepository(),
           ),
@@ -31,12 +34,15 @@ class App extends StatelessWidget {
           create: (context) => CalendarBloc(),
         ),
         BlocProvider<MedicineBloc>(
-          create: (context) => MedicineBloc(),
+          create: (context) => MedicineBloc(
+            authBloc: context.read<AuthBloc>(),
+            medicineRepository: MedicineRepository(),
+          ),
         ),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SignInPage(),
+        home: RegisterPage(),
       ),
     );
   }

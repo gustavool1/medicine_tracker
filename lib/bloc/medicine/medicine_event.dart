@@ -29,6 +29,7 @@ class MedicineSetReminder extends MedicineEvent {
 
 class MedicineSetPillAmount extends MedicineEvent {
   int amount;
-
   MedicineSetPillAmount(this.amount);
 }
+
+class MedicineGetMedicines extends MedicineEvent {}
