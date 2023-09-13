@@ -76,9 +76,10 @@ class _SelectDatesState extends State<SelectDates> {
                       ),
                     ).then((value) {
                       if (value == null) return;
+                      final selectedDate = DateTime.parse(value.toString());
+
                       onSelectStartDate(context, value);
-                      _textEditingControllerStartDate.text =
-                          startSelectedDate.dMY;
+                      _textEditingControllerStartDate.text = selectedDate.dMY;
                     });
                   }),
             ),
@@ -140,10 +141,13 @@ class _SelectDatesState extends State<SelectDates> {
                           const Duration(days: 365),
                         ),
                       ),
+                      // 19 a0 21
                     ).then((value) {
                       if (value == null) return;
+                      final selectedDate = DateTime.parse(value.toString());
+
                       onSelectEndDate(context, value);
-                      _textEditingControllerEndDate.text = endSelectedDate.dMY;
+                      _textEditingControllerEndDate.text = selectedDate.dMY;
                     });
                   }),
             ),
