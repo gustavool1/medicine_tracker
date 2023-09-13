@@ -1,8 +1,4 @@
-import 'dart:math';
-
 import 'package:alarm/alarm.dart';
-import 'package:medicine_tracker/helpers/extensions.dart';
-import 'package:medicine_tracker/models/models.dart';
 
 import '../styles/styles.dart';
 
@@ -23,19 +19,7 @@ class PillModel {
     this.isTaken = false,
   });
 
-  factory PillModel.fromMedicineModelToPillModel(Medicine medicine) {
-    return PillModel(
-      amount: medicine.pillsAmount ?? 1,
-      id: 0,
-      name: medicine.name ?? '',
-      timeToTake: medicine.reminders?[0]?.toHoursMinutes ?? '',
-      takePillDay: DateTime.now(),
-    );
-  }
-
-  void takePill() {
-    isTaken = true;
-  }
+  void takePill() => isTaken = true;
 
   String get amountLabel {
     if (amount > 1) {
