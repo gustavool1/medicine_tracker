@@ -34,31 +34,34 @@ class PillsBloc extends Bloc<PillsEvent, PillsState> {
   }
 
   _onCreatePill(PillsEventCreatePill event, Emitter<PillsState> emit) async {
-    emit(PillLoadingCreation());
-
     if (event.formKey.currentState?.validate() ?? false) {
-      final medicine =
-          await medicineRepository.createMedicine(event.createPill);
-      medicine.setAlarmForAllPills();
+      emit(PillLoadingCreation());
+      try {
+        final medicine =
+            await medicineRepository.createMedicine(event.createPill);
+        medicine.setAlarmForAllPills();
 
-      medicine.pills?.forEach((pill) {
-        final today = DateTime.now();
-        if (pill.takePillDay.day == today.day &&
-            pill.takePillDay.month == today.month &&
-            pill.takePillDay.year == today.year) {
-          _pills.add(pill);
-        }
-      });
+        medicine.pills?.forEach((pill) {
+          final today = DateTime.now();
+          if (pill.takePillDay.day == today.day &&
+              pill.takePillDay.month == today.month &&
+              pill.takePillDay.year == today.year) {
+            _pills.add(pill);
+          }
+        });
 
-      Fluttertoast.showToast(
-        msg: "Medicamento criado com sucesso",
-        toastLength: Toast.LENGTH_SHORT,
-        backgroundColor: Colors.green,
-        textColor: Colors.white,
-      );
+        Fluttertoast.showToast(
+          msg: "Medicamento criado com sucesso",
+          toastLength: Toast.LENGTH_SHORT,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+        );
 
-      emit(PillCreatedSuccessfuly());
-      emit(PillsState(_pills));
+        emit(PillCreatedSuccessfuly());
+        emit(PillsState(_pills));
+      } catch (_) {
+        emit(PillsState(_pills));
+      }
     }
   }
 
