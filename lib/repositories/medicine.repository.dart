@@ -21,6 +21,7 @@ class MedicineRepository {
         'reminders': medicine.reminders
             ?.map((reminder) => reminder?.toHoursMinutes)
             .toList(),
+        'from': medicine.startTakingPill.toString(),
       },
       options: Options(
         headers: {"Authorization": "Bearer $token"},
@@ -30,11 +31,18 @@ class MedicineRepository {
     return Medicine.fromJson(response.data);
   }
 
-  getUserMedicines() async {
-    const storage = FlutterSecureStorage();
-    final token = await storage.read(key: 'USER-TOKEN');
+  Future<List<Medicine>> getUserMedicines(String token) async {
+    try {
+      final response = await _apiServices.api.get('medicines',
+          options: Options(headers: {"Authorization": "Bearer $token"}));
 
-    _apiServices.api.get('medicines',
-        options: Options(headers: {"Authorization": "Bearer $token"}));
+      final List<Medicine> medicines = (response.data as List<dynamic>)
+          .map((pill) => Medicine.fromJson(pill))
+          .toList();
+
+      return medicines;
+    } catch (e) {
+      throw Exception();
+    }
   }
 }
