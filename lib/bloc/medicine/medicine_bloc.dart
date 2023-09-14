@@ -60,8 +60,9 @@ class MedicineBloc extends Bloc<MedicineEvent, MedicineState> {
 
   void _onGetMedicines(
       MedicineGetMedicines event, Emitter<MedicineState> emit) async {
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 1));
     medicines = await medicineRepository.getUserMedicines(authBloc.token);
+
     emit(MedicineGottenSuccessfully(medicine, medicines));
   }
 }
