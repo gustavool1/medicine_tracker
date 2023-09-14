@@ -5,17 +5,19 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:medicine_tracker/bloc/auth/auth_event.dart';
 import 'package:medicine_tracker/bloc/auth/auth_state.dart';
 import 'package:medicine_tracker/repositories/repositories.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository;
-  late String token;
+  String token = '';
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   AuthBloc({required this.authRepository}) : super(AuthInitial()) {
     on<SignInEvent>(_onSignIn);
     on<RegisterEvent>(_onRegister);
   }
 
-  _onSignIn(SignInEvent event, Emitter<AuthState> emit) async {
+  Future<void> _onSignIn(SignInEvent event, Emitter<AuthState> emit) async {
     final isFormValid = event.formKey.currentState?.validate() ?? false;
     if (isFormValid) {
       emit(AuthSignInLoading());
@@ -27,6 +29,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           token = accessToken;
 
           emit(AuthSignInSuccess());
+          await _fillUserInfoOnSharedPreferences();
         }
       } catch (_) {
         emit(AuthSignInFailed());
@@ -40,7 +43,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  _onRegister(RegisterEvent event, Emitter<AuthState> emit) async {
+  Future<void> _onRegister(RegisterEvent event, Emitter<AuthState> emit) async {
     final isFormValid = event.formKey.currentState?.validate() ?? false;
     if (isFormValid) {
       emit(AuthRegisterLoading());
@@ -69,5 +72,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthInitial());
       }
     }
+  }
+
+  Future<void> _fillUserInfoOnSharedPreferences() async {
+    final SharedPreferences prefs = await _prefs;
+    await prefs.setString('token', token);
+  }
+
+  Future<bool> checkIfUserIsSignIn() async {
+    final SharedPreferences prefs = await _prefs;
+    final tokenPref = prefs.getString('token');
+
+    if (tokenPref?.isNotEmpty ?? false) return true;
+    return false;
   }
 }
