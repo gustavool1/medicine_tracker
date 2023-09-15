@@ -1,16 +1,15 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:medicine_tracker/api/api.dart';
-import 'package:medicine_tracker/helpers/extensions.dart';
 
+import '../helpers/helper.dart';
 import '../models/medicine.dart';
 
 class MedicineRepository {
   final _apiServices = ApiServices();
+  final _authHelper = AuthHelper();
 
   Future<Medicine> createMedicine(Medicine medicine) async {
-    const storage = FlutterSecureStorage();
-    final token = await storage.read(key: 'USER-TOKEN');
+    final token = _authHelper.getUserToken();
 
     final response = await _apiServices.api.post(
       'medicines',

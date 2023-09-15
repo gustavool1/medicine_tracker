@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:medicine_tracker/bloc/auth/auth_event.dart';
 import 'package:medicine_tracker/bloc/auth/auth_state.dart';
+import 'package:medicine_tracker/helpers/auth.helper.dart';
 import 'package:medicine_tracker/repositories/repositories.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'models/auth_info.model.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository;
-  String token = '';
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late AuthInfo authInfo;
+  final AuthHelper _authHelper = AuthHelper();
 
   AuthBloc({required this.authRepository}) : super(AuthInitial()) {
     on<SignInEvent>(_onSignIn);
@@ -22,11 +23,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (isFormValid) {
       emit(AuthSignInLoading());
       try {
-        final accessToken = await authRepository.signIn(event.signInData);
-        if (accessToken.isNotEmpty) {
-          const storage = FlutterSecureStorage();
-          await storage.write(key: 'USER-TOKEN', value: accessToken);
-          token = accessToken;
+        final authInfoSignIn = await authRepository.signIn(event.signInData);
+        if (authInfoSignIn.accessToken.isNotEmpty) {
+          authInfo = authInfoSignIn;
+          await _authHelper.setTokenOnPreferences(authInfo.accessToken);
 
           emit(AuthSignInSuccess());
           await _fillUserInfoOnSharedPreferences();
@@ -75,15 +75,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _fillUserInfoOnSharedPreferences() async {
-    final SharedPreferences prefs = await _prefs;
-    await prefs.setString('token', token);
+    await _authHelper.setTokenOnPreferences(authInfo.accessToken);
+    await _authHelper.setRefreshTokenOnPreferences(authInfo.refreshToken);
   }
 
   Future<bool> checkIfUserIsSignIn() async {
-    final SharedPreferences prefs = await _prefs;
-    final tokenPref = prefs.getString('token');
+    final tokenPref = await _authHelper.getUserToken();
 
-    if (tokenPref?.isNotEmpty ?? false) return true;
+    if (tokenPref.isNotEmpty) return true;
     return false;
   }
 }
