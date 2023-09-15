@@ -5,6 +5,7 @@ import 'package:medicine_tracker/bloc/auth/auth_state.dart';
 
 import '../../bloc/auth/auth_event.dart';
 import '../../bloc/auth/models/user_data.model.dart';
+import '../home/home.dart';
 import 'widgets/widgets.dart';
 
 class SignInPage extends StatefulWidget {
@@ -20,9 +21,21 @@ class _SignInPageState extends State<SignInPage> {
       );
 
   TextEditingController textFieldEmailController = TextEditingController();
+  TextEditingController textFieldPasswordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  TextEditingController textFieldPasswordController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    final authBloc = context.read<AuthBloc>();
+
+    authBloc.checkIfUserIsSignIn().then((isSignedIn) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const HomePage()),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

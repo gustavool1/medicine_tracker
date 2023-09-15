@@ -26,6 +26,19 @@ class _RegisterPageState extends State<RegisterPage> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    super.initState();
+    final authBloc = context.read<AuthBloc>();
+
+    authBloc.checkIfUserIsSignIn().then((isSignedIn) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const HomePage()),
+      );
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
       void onSubmit() {
