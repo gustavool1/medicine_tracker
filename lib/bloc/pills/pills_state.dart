@@ -25,3 +25,7 @@ class PillLoadingCreation extends PillsState {
 class PillCreatedSuccessfuly extends PillsState {
   PillCreatedSuccessfuly() : super([]);
 }
+
+class PillSetReminderSuccessfuly extends PillsState {
+  PillSetReminderSuccessfuly() : super([]);
+}

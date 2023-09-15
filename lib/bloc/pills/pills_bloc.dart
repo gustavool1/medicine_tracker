@@ -1,3 +1,4 @@
+import 'package:alarm/alarm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -21,6 +22,7 @@ class PillsBloc extends Bloc<PillsEvent, PillsState> {
     on<PillsEventTakePill>(_onTakePill);
     on<PillsEventCreatePill>(_onCreatePill);
     on<PillsEventGetPillsByDay>(_onGetPillsByDay);
+    on<PillEventChangeReminder>(_onChangeReminder);
   }
 
   _onTakePill(PillsEventTakePill event, Emitter<PillsState> emit) async {
@@ -67,13 +69,32 @@ class PillsBloc extends Bloc<PillsEvent, PillsState> {
 
   _onGetPillsByDay(
       PillsEventGetPillsByDay event, Emitter<PillsState> emit) async {
-    emit(PillLoading());
-    _pills = await pillRepository.getPillsByDay(event.day.yMD);
+    try {
+      emit(PillLoading());
+      _pills = await pillRepository.getPillsByDay(event.day.yMD);
 
-    if (_pills.isEmpty) {
-      emit(PillEmpty());
-      return;
+      if (_pills.isEmpty) {
+        emit(PillEmpty());
+        return;
+      }
+      emit(PillsState(_pills));
+    } catch (e) {
+      emit(PillsState(_pills));
     }
+  }
+
+  _onChangeReminder(
+      PillEventChangeReminder event, Emitter<PillsState> emit) async {
+    await pillRepository.changeReminder(event.pillId, event.timeOfDay);
+
+    for (var pill in _pills) {
+      if (pill.id == event.pillId) {
+        pill.timeToTake = event.timeOfDay.toHoursMinutes;
+        Alarm.stop(event.pillId);
+        pill.setAlarm();
+      }
+    }
+    emit(PillSetReminderSuccessfuly());
     emit(PillsState(_pills));
   }
 }

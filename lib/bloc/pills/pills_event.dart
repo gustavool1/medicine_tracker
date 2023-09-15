@@ -21,3 +21,10 @@ class PillsEventGetPillsByDay extends PillsEvent {
 
   PillsEventGetPillsByDay({required this.day});
 }
+
+class PillEventChangeReminder extends PillsEvent {
+  final int pillId;
+  final TimeOfDay timeOfDay;
+
+  PillEventChangeReminder({required this.pillId, required this.timeOfDay});
+}
