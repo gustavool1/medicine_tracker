@@ -23,7 +23,6 @@ class App extends StatelessWidget {
         BlocProvider<PillsBloc>(
           create: (context) => PillsBloc(
             medicineBloc: MedicineBloc(
-              authBloc: context.read<AuthBloc>(),
               medicineRepository: MedicineRepository(),
             ),
             medicineRepository: MedicineRepository(),
@@ -35,7 +34,6 @@ class App extends StatelessWidget {
         ),
         BlocProvider<MedicineBloc>(
           create: (context) => MedicineBloc(
-            authBloc: context.read<AuthBloc>(),
             medicineRepository: MedicineRepository(),
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medicine_tracker/bloc/bloc.dart';
+import 'package:medicine_tracker/helpers/auth.helper.dart';
 import 'package:medicine_tracker/repositories/repositories.dart';
 
 import '../../models/medicine.dart';
@@ -7,12 +8,11 @@ import '../../models/medicine.dart';
 class MedicineBloc extends Bloc<MedicineEvent, MedicineState> {
   static Medicine medicine = Medicine();
   static List<Medicine> medicines = [];
+  final _authHelper = AuthHelper();
 
   final MedicineRepository medicineRepository;
-  final AuthBloc authBloc;
 
   MedicineBloc({
-    required this.authBloc,
     required this.medicineRepository,
   }) : super(MedicineState(medicine)) {
     on<MedicineSetPillName>(_onMedicineSetPillName);
@@ -60,8 +60,8 @@ class MedicineBloc extends Bloc<MedicineEvent, MedicineState> {
 
   void _onGetMedicines(
       MedicineGetMedicines event, Emitter<MedicineState> emit) async {
-    await Future.delayed(const Duration(seconds: 1));
-    medicines = await medicineRepository.getUserMedicines(authBloc.token);
+    medicines = await medicineRepository
+        .getUserMedicines(await _authHelper.getUserToken());
 
     emit(MedicineGottenSuccessfully(medicine, medicines));
   }
