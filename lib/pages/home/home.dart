@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:alarm/alarm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medicine_tracker/helpers/helper.dart';
 import 'package:medicine_tracker/pages/medicines/medicines.dart';
 import 'package:medicine_tracker/styles/colors.dart';
 import 'package:medicine_tracker/ui/calendar/calendar.dart';
@@ -26,6 +27,11 @@ class _HomePageState extends State<HomePage> {
     subscription ??= Alarm.ringStream.stream.listen(
       (alarmSettings) => navigateToRingScreen(alarmSettings.id),
     );
+
+    final authBloc = context.read<AuthBloc>();
+    AuthHelper()
+        .initializeAuthInfo()
+        .then((authInfo) => authBloc.authInfo = authInfo);
   }
 
   navigateToRingScreen(int id) {

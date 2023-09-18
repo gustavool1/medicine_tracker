@@ -14,6 +14,7 @@ class SubmitButton extends StatelessWidget {
       bloc: BlocProvider.of<PillsBloc>(context),
       listener: (context, state) {
         if (state is PillCreatedSuccessfuly) {
+          context.read<MedicineBloc>().add(MedicineGetMedicines());
           Navigator.pop(context);
         }
       },

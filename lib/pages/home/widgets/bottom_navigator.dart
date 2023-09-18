@@ -10,9 +10,16 @@ class BottomNavigator extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
       return BottomNavigationBar(
-        onTap: (index) => context.read<HomeBloc>().add(
-              HomeEventChangeBottomNavigator(index: index),
-            ),
+        onTap: (index) {
+          context.read<HomeBloc>().add(
+                HomeEventChangeBottomNavigator(index: index),
+              );
+          if (index == 0) {
+            context
+                .read<PillsBloc>()
+                .add(PillsEventGetPillsByDay(day: DateTime.now()));
+          }
+        },
         currentIndex: state.index,
         items: const [
           BottomNavigationBarItem(
