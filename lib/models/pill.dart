@@ -4,14 +4,16 @@ import '../styles/styles.dart';
 
 class PillModel {
   final int id;
-  final String timeToTake;
+  final String medicineId;
   final DateTime takePillDay;
   final String name;
   final int amount;
+  String timeToTake;
   bool isTaken;
 
   PillModel({
     required this.id,
+    required this.medicineId,
     required this.timeToTake,
     required this.takePillDay,
     required this.name,
@@ -31,6 +33,7 @@ class PillModel {
   factory PillModel.fromMap(Map<String, dynamic> map) {
     return PillModel(
       id: map['id'],
+      medicineId: map['medicineId'],
       timeToTake: map['takePillHour'],
       takePillDay: DateTime.parse(map['takePillDay']),
       name: map['name'],

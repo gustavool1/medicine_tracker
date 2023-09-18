@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:medicine_tracker/bloc/bloc.dart';
 import 'package:medicine_tracker/helpers/auth.helper.dart';
 import 'package:medicine_tracker/repositories/repositories.dart';
@@ -21,6 +23,8 @@ class MedicineBloc extends Bloc<MedicineEvent, MedicineState> {
     on<MedicineSetEndDate>(_onSetEndDate);
     on<MedicineSetReminder>(_onSetReminder);
     on<MedicineGetMedicines>(_onGetMedicines);
+
+    on<MedicineDelete>(_onMedicineDelete);
   }
 
   _onMedicineSetPillName(
@@ -62,7 +66,26 @@ class MedicineBloc extends Bloc<MedicineEvent, MedicineState> {
       MedicineGetMedicines event, Emitter<MedicineState> emit) async {
     medicines = await medicineRepository
         .getUserMedicines(await _authHelper.getUserToken());
-
+    if (medicines.isEmpty) {
+      emit(MedicineEmpty());
+      return;
+    }
     emit(MedicineGottenSuccessfully(medicine, medicines));
+  }
+
+  void _onMedicineDelete(
+      MedicineDelete event, Emitter<MedicineState> emit) async {
+    await medicineRepository.deleteMedicine(
+        event.id, await _authHelper.getUserToken());
+
+    medicines.removeWhere((medicine) => medicine.id == event.id);
+
+    Fluttertoast.showToast(
+      msg: "Medicamento deletado",
+      toastLength: Toast.LENGTH_SHORT,
+      backgroundColor: Colors.green,
+      textColor: Colors.white,
+    );
+    emit(MedicineDeletedSuccessfully(medicine, medicines));
   }
 }

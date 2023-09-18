@@ -44,4 +44,12 @@ class MedicineRepository {
       throw Exception();
     }
   }
+
+  Future<bool> deleteMedicine(String id, String token) async {
+    final response = await _apiServices.api.get('medicines/$id',
+        options: Options(headers: {"Authorization": "Bearer $token"}));
+
+    if (response.statusCode == 200) return true;
+    return false;
+  }
 }

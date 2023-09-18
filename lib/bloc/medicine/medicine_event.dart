@@ -33,3 +33,8 @@ class MedicineSetPillAmount extends MedicineEvent {
 }
 
 class MedicineGetMedicines extends MedicineEvent {}
+
+class MedicineDelete extends MedicineEvent {
+  String id;
+  MedicineDelete(this.id);
+}

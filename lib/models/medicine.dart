@@ -47,9 +47,11 @@ class Medicine {
       name: map['name'],
       pillsAmount: map['frequency'],
       endTakingPill: DateTime.parse(map['until']),
-      pills: (map['pills'] as List<dynamic>)
-          .map((pill) => PillModel.fromMap(pill as Map<String, dynamic>))
-          .toList(),
+      pills: map['pills'] == null
+          ? null
+          : (map['pills'] as List<dynamic>)
+              .map((pill) => PillModel.fromMap(pill as Map<String, dynamic>))
+              .toList(),
     );
   }
 
