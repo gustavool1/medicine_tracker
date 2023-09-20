@@ -1,16 +1,59 @@
-# medicine_tracker
+# Medicine Tracker 
+[![NPM](https://img.shields.io/npm/l/react)]([https://github.com/devsuperior/sds1-wmazoni/blob/master/LICENSE](https://github.com/gustavool1/medicine_tracker/blob/main/LICENSE)) 
 
-A new Flutter project.
+# Sobre o projeto
 
-## Getting Started
+Medicine tracker é um projeto criado para ajudar os usuários a manterem controle dos remédios que precisam ingerir no seu dia-a-dia através de alarmes
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Layout 
+![Mobile 1](https://github.com/gustavool1/medicine_tracker/blob/main/assets/prints/register.png?raw=true) ![Mobile 2](https://github.com/gustavool1/medicine_tracker/blob/main/assets/prints/signin.png?raw=true) ![Mobile 3](https://github.com/gustavool1/medicine_tracker/blob/main/assets/prints/home.png?raw=true)  ![Mobile 4](https://github.com/gustavool1/medicine_tracker/blob/main/assets/prints/medicines.png?raw=true) ![Mobile 5](https://github.com/gustavool1/medicine_tracker/blob/main/assets/prints/medicine.png?raw=true) ![Mobile 5](https://github.com/gustavool1/medicine_tracker/blob/main/assets/prints/alarm.png?raw=true)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+# Tecnologias utilizadas
+
+## Front end
+- Dart
+- Flutter
+
+
+
+# Como executar o projeto
+
+## Back end
+Pré-requisitos: Java 11
+
+```bash
+# clonar repositório
+git clone https://github.com/devsuperior/sds1-wmazoni
+
+# entrar na pasta do projeto back end
+cd backend
+
+# executar o projeto
+./mvnw spring-boot:run
+```
+
+## Front end web
+Pré-requisitos: npm / yarn
+
+```bash
+# clonar repositório
+git clone https://github.com/devsuperior/sds1-wmazoni
+
+# entrar na pasta do projeto front end web
+cd front-web
+
+# instalar dependências
+yarn install
+
+# executar o projeto
+yarn start
+```
+
+# Autor
+
+Gustavo Oliveira
+
+https://www.linkedin.com/in/gustavo-oliveira01011/
