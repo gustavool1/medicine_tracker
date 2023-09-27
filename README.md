@@ -22,34 +22,40 @@ Medicine tracker é um projeto criado para ajudar os usuários a manterem contro
 # Como executar o projeto
 
 ## Back end
-Pré-requisitos: Java 11
 
 ```bash
 # clonar repositório
-git clone https://github.com/devsuperior/sds1-wmazoni
+git clone https://github.com/gustavool1/medicine_tracker_api backend
 
 # entrar na pasta do projeto back end
 cd backend
+Preencher .env, tome como base o .env.example
 
-# executar o projeto
-./mvnw spring-boot:run
+# Criar a imagem docker do app
+sudo docker build -t medicine-tracker .
+
+# Rode o compose
+sudo docker-compose up
+
+Pronto, agora o back já está pronto para receber uma request!
+
 ```
 
-## Front end web
+## Front end 
 Pré-requisitos: npm / yarn
 
 ```bash
 # clonar repositório
-git clone https://github.com/devsuperior/sds1-wmazoni
+git clone https://github.com/gustavool1/medicine_tracker.git frontend
 
-# entrar na pasta do projeto front end web
-cd front-web
+# entrar na pasta do projeto front end
+cd frontend
 
 # instalar dependências
-yarn install
+flutter pub get
 
 # executar o projeto
-yarn start
+
 ```
 
 # Autor
