@@ -16,7 +16,8 @@ Medicine tracker é um projeto criado para ajudar os usuários a manterem contro
 ## Front end
 - Dart
 - Flutter
-
+- Bloc
+- Shared Preferences
 
 
 # Como executar o projeto
@@ -30,6 +31,9 @@ git clone https://github.com/gustavool1/medicine_tracker_api backend
 # entrar na pasta do projeto back end
 cd backend
 Preencher .env, tome como base o .env.example
+
+# Instalar dependências do projeto
+yarn
 
 # Criar a imagem docker do app
 sudo docker build -t medicine-tracker .
@@ -54,7 +58,7 @@ cd frontend
 # instalar dependências
 flutter pub get
 
-# executar o projeto
+Pronto, agora já pode executar o projeto!
 
 ```
 
