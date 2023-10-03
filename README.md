@@ -46,7 +46,6 @@ Pronto, agora o back já está pronto para receber uma request!
 ```
 
 ## Front end 
-Pré-requisitos: npm / yarn
 
 ```bash
 # clonar repositório
